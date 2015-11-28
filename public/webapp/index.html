@@ -3,20 +3,27 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-        <title>LNdk-App</title>
+        <title>EventYourself</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
 
-        <link rel="stylesheet" href="assets/css/main.css">
+        <link rel="stylesheet" href="assets/css/main_bootstrap-material-design.css">
+        <link rel="stylesheet" href="assets/css/ripples.css">
         <base href="/">
+        <script src="assets/javascripts/jquery-2.1.4.js"></script>
+        <script src="assets/javascripts/bootstrap.js"></script>
+        <script src="assets/javascripts/material.js"></script>
+        <script src="assets/javascripts/ripples.js"></script>
+        <script>$(document).ready(function() {
+            $.material.init()
+        });</script>
 
     </head>
     <body class="ng-cloak" >
 
-
         <div class="header-container">
             <header class="wrapper clearfix" data-ng-controller="navigationController">
-                <h1 class="title"><a href="/">Lange Nacht der Karriere</a></h1>
+                <h1 class="title"><a href="/">EventYourself</a></h1>
                 <div class="menu-hamburger visible-xs {{navMenuIsOpen ? 'visible' : ''}}" data-ng-click="toggleMenu()"><img data-ng-src="{{getImagePath('hamburger-menu.png')}}" /><!--<span class="glyphicon glyphicon-menu-hamburger " aria-hidden="true" ></span>--></div>
                 <nav id='mainNav' class="hidden-xs {{navMenuIsOpen ? 'visible' : ''}}">
                     <ul>
