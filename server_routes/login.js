@@ -122,14 +122,17 @@ app.post('/login', function (req, res, next) {
     checkUser(res, req.body.username, req.body.password, req);
 
 });
+
 app.put('/register', function (req, res, next) {
     "use strict";
     register(res, req.body.username, req.body.password, req.body.interests ,next);
 });
+
 app.get('/', function (req, res) {
     "use strict";
     res.json(req.session.username);
 });
+
 app.delete('/logout', function (req, res) {
     "use strict";
     var data = {

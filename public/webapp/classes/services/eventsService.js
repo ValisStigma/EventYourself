@@ -38,10 +38,12 @@ define([], function(){
 			return def.promise;
 		};
 
-		var getEventsByTagNames = function () {
+		var getEventsByTagNames = function ( tags ) {
 			var def = $q.defer();
 
-			$http.post();
+			$http.post(getAPI_URL('events/getByTagNames'), { interests: tags })
+				.success( function ( data ) { def.resolve(data); } )
+				.error(function (data) { def.reject(data); });
 
 			return def.promise;
 		};
@@ -97,7 +99,7 @@ define([], function(){
 			return def.promise;
 		};
 
-		return { getAll: getAll, getEventById: getEventById, createComment: createComment, getComments: fetchComments }
+		return { getAll: getAll, getEventById: getEventById, createComment: createComment, getComments: fetchComments, getEventsByTagNames:getEventsByTagNames }
 	};
 
 	eventsService.$inject = [ '$http', 'ConfigService', '$q' ];
