@@ -11,8 +11,10 @@ require.config({
 		'eventController'       : 'classes/controllers/eventController',
 		'eventDetailController' : 'classes/controllers/eventDetailController',
 		'feedbackController'    : 'classes/controllers/feedbackController',
+		'interestController'    : 'classes/controllers/interestController',
 		'ConfigService'         : 'classes/services/configService',
 		'EventsService'         : 'classes/services/eventsService',
+		'UserService'           : 'classes/services/userService',
 		'FeedbackService'       : 'classes/services/feedbackService'
 	},
 

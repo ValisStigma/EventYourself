@@ -1,19 +1,19 @@
-define(['homeController', 'eventController', 'eventDetailController', 'feedbackController'],function(homeController, eventController, eventDetailController, feedbackController){
+define(['eventController', 'interestController' ,'eventDetailController', 'feedbackController'],function(eventController, interestController, eventDetailController, feedbackController){
 	'use strict';
 
 	function config( $routeProvider, $locationProvider ) {
 
 		$routeProvider
 			.when('/', {
-				templateUrl : 'pageTemplates/home.html',
-				controller  : homeController,
-				activetab: 'home'
-			})
-
-			.when('/events', {
 				templateUrl : 'pageTemplates/events.html',
 				controller  : eventController,
 				activetab: 'events'
+			})
+
+			.when('/interests', {
+				templateUrl : 'pageTemplates/interests.html',
+				controller  : interestController,
+				activetab: 'interest'
 			})
 
 			.when('/feedback', {

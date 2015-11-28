@@ -1,5 +1,8 @@
 <div class="events-body">
+    <h1>Some Events for You</h1>
+
     <p data-ng-show="isError">Error: {{errorMsg}}</p>
+
 
     <div class="row events-container">
         <div data-ng-repeat="event in events | orderBy:'order'" class="event-list-item col-xs-12 col-sm-12 col-md-6 col-lg-6">
