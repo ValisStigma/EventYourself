@@ -3,10 +3,10 @@ define([], function( ){
 
 	function eventController( $scope, EventsService, ConfigService, UserService, $location ){
 
-		if(UserService.isGuest()) {
-			$location.path('interests');
-		} else {
+		if(UserService.hasInterests()) {
 			$scope.interests = UserService.getInterests();
+		} else {
+			$location.path('interests');
 		}
 
 		EventsService.getAll().then(
