@@ -91,7 +91,8 @@ function checkUser(res, username, password, req) {
             if (err || doc === null) {
                 data.success = false;
                 req.session.isLoggedIn = false;
-                res.send(JSON.stringify(data));
+                res.status(400).send("Feedback data incomplete");
+
             }
             if (hash.verify(password, doc.password)) {
                 req.session.isLoggedIn = true;
@@ -106,13 +107,15 @@ function checkUser(res, username, password, req) {
             } else {
                 data.success = false;
                 req.session.isLoggedIn = false;
-                res.send(JSON.stringify(data));
+                res.status(400).send("Feedback data incomplete");
+
             }
         });
     } else {
         data.success = false;
         data.invalidData = true;
-        res.send(JSON.stringify(data));
+        res.status(400).send("Feedback data incomplete");
+
     }
 }
 
