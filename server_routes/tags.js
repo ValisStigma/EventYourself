@@ -6,23 +6,10 @@ var collections = ['tags'];
 
 var mongoose = require('mongoose');
 mongoose.createConnection('mongodb://rolf:StartUp15@ds059644.mongolab.com:59644/heroku_4ph3bdfk');
-var db = mongoose.connection;
 
 var ObjectId = require('mongoose').Types.ObjectId;
 
-var allTags = mongoose.model('tags', new mongoose.Schema({ _id: String, Name: String },
-    { collection : 'tags' }) );
 
-mongoose.connect('mongodb://localhost/mydatabase');
-var db = mongoose.connection;
-db.on('error', console.error.bind(console, 'connection error:'));
-db.once('open', function callback () {
-    console.log('DB connection opened');
-    allTags.find({}, function(lo, la
-
-    ){console.log(lo); console.log(la);}
-);});
-// ...
 
 var MongoClient = require('mongodb').MongoClient
     , assert = require('assert');
