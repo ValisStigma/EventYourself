@@ -1,0 +1,53 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>LNdk-App</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+
+        <link rel="stylesheet" href="assets/css/main.css">
+        <base href="/">
+
+    </head>
+    <body class="ng-cloak" >
+
+
+        <div class="header-container">
+            <header class="wrapper clearfix" data-ng-controller="navigationController">
+                <h1 class="title"><a href="/">Lange Nacht der Karriere</a></h1>
+                <div class="menu-hamburger visible-xs {{navMenuIsOpen ? 'visible' : ''}}" data-ng-click="toggleMenu()"><img data-ng-src="{{getImagePath('hamburger-menu.png')}}" /><!--<span class="glyphicon glyphicon-menu-hamburger " aria-hidden="true" ></span>--></div>
+                <nav id='mainNav' class="hidden-xs {{navMenuIsOpen ? 'visible' : ''}}">
+                    <ul>
+                        <li class="{{(activetab == '/' || activetab == '') ? 'active' : ''}}"><a data-ng-click="toggleMenu(); setActivePage('/')" href="#/">Home</a></li>
+                        <li class="{{activetab == '/events' ? 'active' : ''}}"><a data-ng-click="toggleMenu(); setActivePage('/events');"  href="#/events">Events</a></li>
+                        <li class="{{activetab == '/feedback' ? 'active' : ''}}"><a data-ng-click="toggleMenu(); setActivePage('/feedback');"  href="#/feedback">Feedback</a></li>
+                    </ul>
+                </nav>
+
+            </header>
+        </div>
+
+
+
+        <div class="main-container">
+            <div class="main wrapper clearfix">
+                <div data-ng-view>
+
+                </div>
+
+            </div> <!-- #main -->
+        </div> <!-- #main-container -->
+
+
+        <div class="footer-container">
+            <footer class="wrapper">
+                <img src="assets/images/logo.jpg">
+            </footer>
+        </div>
+
+        <script src="./libraries/requirejs/require-js.min.js" data-main="./classes/main.js"></script>
+
+    </body>
+</html>

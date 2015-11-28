@@ -1,0 +1,35 @@
+<div class="feedback-body">
+    <div data-ng-show="message.length <= 0">
+    <h2>Deine Meinung zählt</h2>
+    <p>Wie zufrieden bist du mit der langen Nacht der Karriere? Hast du Anregungen oder Kritik? Dann teil und deine Meinung mit. Die Nachricht wird vertraulich behandelt.</p>
+
+        <div class="feedback-form-row row clearfix">
+            <div class="col-xs-12 col-lg-12 input-group">
+                <span class="input-group-addon" id="feedback-addon">Feedback *</span>
+                <textarea type="text" id="feedback-text" class="form-control" aria-describedby="feedback-addon" data-ng-model="feedback.msg" required="true"></textarea>
+            </div>
+        </div>
+
+
+        <div class="feedback-form-row row clearfix">
+            <div class="col-xs-12 col-md-8 input-group author-row">
+                <span class="input-group-addon" id="feedback-author-addon">Verfasser</span>
+                <input type="text" id="feedback-author" class="form-control" aria-describedby="feedback-author-addon" data-ng-model="feedback.author" />
+            </div>
+
+            <div class="col-md-4 col-xs-12 submit-row">
+                <button type="button" class="btn btn-success" data-ng-click="submit()">Feedback abschicken</button>
+            </div>
+        </div>
+
+        <p>* = Obligatorisch</p>
+    </div>
+    <div data-ng-show="message.length > 0" class="feedback-message">
+        <p>{{message}}</p>
+        <div class="feedback-form-row row clearfix">
+            <div class="col-md-3 col-xs-12 submit-row">
+                <button type="button" class="btn btn-success" data-ng-click="reset()">Noch mehr Feedback geben</button>
+            </div>
+        </div>
+    </div>
+</div>

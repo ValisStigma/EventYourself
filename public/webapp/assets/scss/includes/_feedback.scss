@@ -1,0 +1,105 @@
+.feedback-body {
+	.row {
+		margin-left: 0;
+		margin-right: 0;
+	}
+
+	.feedback-message {
+		color: $base-text-color;
+	}
+	.feedback-form-row {
+		margin-bottom: 1rem;
+		position: relative;
+
+		textarea, input {
+			border: 1px solid $base-text-color;
+			//border-left: none;
+			background: #363100;
+			color: $base-text-color;
+		}
+
+		.btn {
+			color: black;
+			background: $primary-color-accent;
+		}
+
+		.input-group {
+			height: 55px;
+
+			.input-group-addon {
+				color: white;
+				background-color: $primary-color;
+				border-color: $primary-color-accent;
+				display: inline-block;
+				width: $input-label-length;
+				height: 55px;
+				line-height: 37px;
+				vertical-align: middle;
+				position: absolute;
+				left: 1px;
+				z-index: 100;
+			}
+
+			input, textarea {
+				width: 100-$input-label-length;
+				display: inline-block;
+				float: right;
+				height: 55px;
+			}
+		}
+
+		input, button {
+			width: 100%;
+		}
+		button {
+			background-color: $primary-color;
+			border-color: $primary-color-accent;
+		}
+		button:hover {
+			background-color: $primary-color-accent;
+			border-color: $primary-color;
+		}
+		.submit-row {
+			padding: 0;
+			margin-top:10px;
+		}
+		.ng-invalid-required.ng-touched {
+			border-color: red;
+		}
+
+		.ng-valid.ng-touched {
+			//background-color: #78FA89;
+		}
+	}
+}
+
+@media only screen and (min-width: 992px) {
+	.feedback-body {
+		.feedback-form-row {
+			#feedback-addon {
+				width: 20%;
+			}
+			#feedback-text {
+				width: 80%;
+			}
+			.author-row {
+				float:left!important;
+			}
+			.submit-row {
+				padding-left:15px;
+				height:55px;
+				margin-top:0;
+				button {
+					height: 55px;
+				}
+
+			}
+		}
+		.feedback-message {
+			.submit-row {
+				padding-left: 0;
+			}
+		}
+
+	}
+}

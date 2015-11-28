@@ -1,0 +1,83 @@
+<div class="event-detail-body">
+    <p data-ng-show="isError">{{errorMsg}}</p>
+    <div class="row description-body">
+        <div class="col-xs-12 col-lg-4 left-row">
+            <a href="#/events" class="back-btn"><img data-ng-src="{{getImagePath('back.png')}}" alt="back button">Übersicht</a>
+            <img data-ng-src="{{ event.picture && getImagePath(event.picture) }}" alt="event image">
+
+            <a data-ng-show="event.registrationUrl.length > 0" class="clearfix event-category-box" data-ng-href="{{event.registrationUrl}}">
+                <p class="event-category">Melde dich gleich hier an!</p>
+            </a>
+            <p data-ng-show="event.category.length > 0" class="event-category">{{event.category}}</p>
+        </div>
+
+        <div class="col-xs-12 col-lg-8  right-row">
+            <h1>{{event.name}}</h1>
+            <p class="event-time">
+                <span class="glyphicon glyphicon-time"></span>
+                {{event.startTime| date: 'HH:mm'}} - {{event.endTime| date: 'HH:mm'}}
+                <span data-ng-show="event.period">Alle {{event.period}} Minuten</span>
+            </p>
+            <p class="event-location"><span class="glyphicon glyphicon-pushpin"></span> {{event.location}}</p>
+
+            <div class="event-sponsors">
+                <span class="glyphicon glyphicon-user"></span>
+                <span data-ng-repeat="sponsor in event.sponsor" class="sponsor">
+                    <a data-ng-show="sponsor.url.length > 0" target="_blank" data-ng-href="{{sponsor.url}}">{{sponsor.name}}</a>{{$last ? '' : ', '}}
+                    <span data-ng-show="!sponsor.url">{{sponsor.name}}{{$last ? '' : ', '}} </span>
+                    </span>
+            </div>
+            <h3>Beschreibung</h3>
+            <p class="event-description">{{event.description}}</p>
+            <div data-ng-show="commentSent" class="feedback-message">
+                <p>Vielen Dank für deinen Kommentar!</p>
+            </div>
+
+            <div class="event-form-row row clearfix" data-ng-show="commentSent">
+                <div class="col-lg-3 col-xs-12 submit-row">
+                    <button type="button" class="btn btn-success" data-ng-click="reset()">Weiterer Kommentar</button>
+                </div>
+            </div>
+
+            <div data-ng-hide="commentSent">
+                <div class="event-form-row col-xs-12 clearfix input-group">
+                    <span class="input-group-addon" id="event-comment-addon">Kommentar *</span>
+                    <textarea  rows="4" id="event-comment" class="form-control" aria-describedby="event-comment-addon" data-ng-model="comment.msg" required="true"></textarea>
+                </div>
+
+
+                <div class="row event-form-row row clearfix">
+                    <div class="col-xs-12 name-container">
+                        <div class="input-group">
+                            <span class="input-group-addon" id="event-comment-name-addon">Verfasser</span>
+                            <input type="text" id="event-comment-name" class="form-control" aria-describedby="event-comment-name-addon" data-ng-model="comment.author" >
+                        </div>
+                    </div>
+                </div>
+                <div class="event-form-row row clearfix">
+                    <div class="col-lg-offset-8 col-lg-4 col-xs-12 submit-row">
+                        <button type="button" class="btn btn-success" data-ng-click="submit()">Kommentar erfassen</button>
+                    </div>
+                </div>
+
+                <p>* = Obligatorisch</p>
+            </div>
+
+
+
+            <div class="event-form-row row clearfix" >
+                <div class="col-xs-12 comment-row">
+                    <h3 data-ng-show="event.comments.length > 0">Kommentare</h3>
+                    <ul >
+                        <li class="event-comment" data-ng-repeat="comment in event.comments">
+                            <p>{{comment.text}}</p>
+                            <span data-ng-show="comment.author.length > 0"> - {{comment.author}}</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+        </div>
