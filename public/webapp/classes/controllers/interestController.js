@@ -33,7 +33,7 @@ define([], function( ){
 		};
 
 		$scope.tagIsSelected = function ( id ) {
-			return interestAlreadySelected(id);
+			return interestAlreadySelected(id) ? 'selected' : '';
 		};
 
 		TagService.getAll().then(
