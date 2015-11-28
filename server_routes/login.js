@@ -14,13 +14,13 @@ function isAdmin(userId) {
 }
 
 function getInterests(req, res, next) {
-    db.users.findOne({username: username}, function (err, doc) {
+    db.users.findOne({username: req.session.username}, function (err, doc) {
         if (err || doc === null) {
             data.success = false;
             req.session.isLoggedIn = false;
             res.send(JSON.stringify(data));
         }
-        if (hash.verify(password, doc.password)) {
+        else {
             req.session.isLoggedIn = true;
             req.session.username = username;
             req.session.userId = doc._id;
@@ -28,10 +28,6 @@ function getInterests(req, res, next) {
                 req.session.isAdmin = true;
             }
             data.interests = doc.interests;
-            res.send(JSON.stringify(data));
-        } else {
-            data.success = false;
-            req.session.isLoggedIn = false;
             res.send(JSON.stringify(data));
         }
     });

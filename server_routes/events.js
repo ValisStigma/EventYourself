@@ -53,31 +53,28 @@ function findEvent(id, callback) {
     })
 }
 
-function createComment(event, author, text, callback){
-    var comments = event.comments;
-    comments.push({author: author, text:text });
-    db.events.update({_id: db.ObjectId(event._id)}, {
-        $set: {
-            comments: comments
-        }
-    }, function (err, newEvent) {
-        if (err) {
-            callback(null);
-        } else {
-            callback(newEvent);
-        }
-    });
-}
 
 app.get('/', function(request, response) {
+    var interests = request.body.interests;
     db.events.find({},{comments:0}, function (err, events) {
         if (err) {
             response.json(err);
         } else {
+            var matchedEvents = [];
+
+            var findOne = function (haystack, arr) {
+                return arr.some(function (v) {
+                    return haystack.indexOf(v) >= 0;
+                });
+            };
+
             events.forEach(function(event) {
+                if(findOne(event.tags, interests)) {
+                    matchedEvents.push(event);
+                }
                 event.comments = [];
             });
-            response.json({events: events});
+            response.json({events: matchedEvents});
         }
     });
 });
@@ -117,7 +114,6 @@ app.get('/:id', function(request, response) {
                 picture: event.picture,
                 period: event.period,
                 rating: event.rating,
-                sponsor: event.sponsor,
                 sponsor: event.sponsor,
                 location: event.location,
                 order: event.order,
@@ -159,31 +155,7 @@ app.post('/:id', function(request, response) {
 
 });
 
-app.get('/:id/comments', nocache, function(request, response) {
-    findEvent(request.params.id, function(event) {
-        if(event){
-            response.json({ comments: event.comments });
-        } else{
-            response.status(404).send('Event (id '+request.params.id+') not found.')
-        }
-    });
 
-});
 
-app.post('/:id/comments', function(request, response) {
-    findEvent(request.params.id, function(event) {
-        if(event){
-            createComment(event, request.body.author, request.body.text, function(newComment) {
-                if(newComment){
-                    response.json(newComment);
-                } else {
-                    response.status(400).send('Comment data not valid');
-                }
-            });
-        } else{
-            response.status(404).send('Event (id '+request.params.id+') not found.')
-        }
-    });
-});
 
 module.exports = app;
