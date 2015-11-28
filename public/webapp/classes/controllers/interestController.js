@@ -32,6 +32,10 @@ define([], function( ){
 			});
 		};
 
+		$scope.tagIsSelected = function ( id ) {
+			return interestAlreadySelected(id);
+		};
+
 		TagService.getAll().then(
 				function( tags ) { $scope.tags = tags;},
 				function( error ) { $scope.errorMsg = error; $scope.isError = true;}
@@ -40,7 +44,8 @@ define([], function( ){
 		$scope.register = function () {
 			var user = {
 				username: $scope.username,
-				password: $scope.password
+				password: $scope.password,
+				interests: $scope.selectedInterests
 			};
 
 			UserService.registerUser(user).then(function( msg ) {
