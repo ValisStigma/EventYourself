@@ -1,9 +1,15 @@
 var express = require('express');
 var collections = ['events'];
-var dburi = 'mongodb://rolf:StartUp15@ds059644.mongolab.com:59644/heroku_4ph3bdfk';
-var mongojs = require('mongojs');
-var db = mongojs(dburi, collections);
 var app = express();
+var mongoose = require('mongoose');
+mongoose.createConnection('mongodb://rolf:StartUp15@ds059644.mongolab.com:59644/heroku_4ph3bdfk');
+
+var ObjectId = require('mongoose').Types.ObjectId;
+
+var allEvents = mongoose.model('events', new mongoose.Schema({ _id: String, place: String, title: String, time: String, tags: [{ Name: String }], },
+    { collection : 'events' }) );
+
+
 var allowCrossDomain = function(request, response, next) {
     response.header('Access-Control-Allow-Origin', '*');
     response.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
@@ -34,7 +40,7 @@ function createEvent(name, description, startTime, endTime, category, picture, p
         comments:[],
         location:location
     };
-    db.events.insert(event, function(err, newEvent) {
+    allEvents.insert(event, function(err, newEvent) {
         if(err) {
             callback(null);
         } else {
@@ -44,7 +50,7 @@ function createEvent(name, description, startTime, endTime, category, picture, p
 }
 
 function findEvent(id, callback) {
-    db.events.findOne({_id: db.ObjectId(id)}, function(err, event) {
+    allEvents.findOne({"_id": id}, function(err, event) {
         if(err) {
             callback(null);
         } else {
@@ -59,7 +65,7 @@ app.post('/getByTagNames', nocache, function(request, response) {
         interests = request.body.interests;
     }
     if(interests) {
-        db.events.find({},{comments:0}, function (err, events) {
+        allEvents.find({},{comments:0}, function (err, events) {
             if (err) {
                 response.json(err);
             } else {
@@ -103,7 +109,7 @@ app.get('/', nocache, function(request, response) {
         interests = request.body.interests;
     }
     if(interests) {
-        db.events.find({},{comments:0}, function (err, events) {
+        allEvents.find({},{comments:0}, function (err, events) {
             if (err) {
                 response.json(err);
             } else {

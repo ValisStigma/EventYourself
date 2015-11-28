@@ -3,9 +3,44 @@
  */
 var express = require('express');
 var collections = ['tags'];
-var dburi = 'mongodb://rolf:StartUp15@ds059644.mongolab.com:59644/heroku_4ph3bdfk';
-var mongojs = require('mongojs');
-var db = mongojs(dburi, collections);
+
+var mongoose = require('mongoose');
+mongoose.createConnection('mongodb://rolf:StartUp15@ds059644.mongolab.com:59644/heroku_4ph3bdfk');
+var db = mongoose.connection;
+
+var ObjectId = require('mongoose').Types.ObjectId;
+
+var allTags = mongoose.model('tags', new mongoose.Schema({ _id: String, Name: String },
+    { collection : 'tags' }) );
+
+mongoose.connect('mongodb://localhost/mydatabase');
+var db = mongoose.connection;
+db.on('error', console.error.bind(console, 'connection error:'));
+db.once('open', function callback () {
+    console.log('DB connection opened');
+    allTags.find({}, function(lo, la
+
+    ){console.log(lo); console.log(la);}
+);});
+// ...
+
+var MongoClient = require('mongodb').MongoClient
+    , assert = require('assert');
+
+// Connection URL
+var url = 'mongodb://rolf:StartUp15@ds059644.mongolab.com:59644/heroku_4ph3bdfk';
+var url = 'mongodb://rolf:StartUp15@ds059644.mongolab.com:59644/heroku_4ph3bdfk';
+// Use connect method to connect to the Server
+var superTags;
+MongoClient.connect(url, function(err, db) {
+    assert.equal(null, err);
+    console.log("Connected correctly to server");
+    superTags = db.collection('tags');
+    // Find some documents
+
+});
+
+// ...
 var app = express();
 var allowCrossDomain = function(request, response, next) {
     response.header('Access-Control-Allow-Origin', '*');
@@ -27,7 +62,7 @@ function createTag(name, callback){
     var tag = {
         name : name
     };
-    db.tags.insert(tag, function(err, newTag) {
+    superTags.insert(tag, function(err, newTag) {
         if(err) {
             callback(null);
         } else {
@@ -37,13 +72,21 @@ function createTag(name, callback){
 }
 
 app.get('/', function(request, response) {
-    db.tags.find({}, function (err, tags) {
-        if (err) {
-            response.json(err);
-        } else {
-            response.json({tags: tags});
-        }
+    MongoClient.connect(url, function(err, db) {
+        assert.equal(null, err);
+        console.log("Connected correctly to server");
+        superTags = db.collection('tags');
+        superTags.find({}, function (err, tags) {
+            if (err) {
+                response.json(err);
+            } else {
+                response.json({tags: tags});
+            }
+        });
+        // Find some documents
+
     });
+
 });
 
 app.post('/', function(request, response) {
