@@ -10,7 +10,9 @@ define([], function( ){
 				function( error ) { $scope.errorMsg = error; $scope.isError = true;}
 			);
 		} else if( UserService.isGuestWithInterests()) {
-			EventsService.getEventsByTagNames($cookies.get('interests'))
+			var interests = $cookies.get('interests');
+			if(typeof interests == 'string') { interests = interests.split(','); }
+			EventsService.getEventsByTagNames(interests)
 				.then(function (events) { $scope.events = events; });
 		} else {
 			$location.path('interests');
