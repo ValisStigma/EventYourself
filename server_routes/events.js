@@ -53,9 +53,53 @@ function findEvent(id, callback) {
     })
 }
 
+app.post('/getByTagNames', function(request, response) {
+    var interests = null;
+    if(request.session && request.session.interests) {
+        interests = request.session.interests;
+    } else if(request.body.interests) {
+        interests = request.body.interests;
+    }
+    if(interests) {
+        db.events.find({},{comments:0}, function (err, events) {
+            if (err) {
+                response.json(err);
+            } else {
+                var matchedEvents = [];
+
+                var findOne = function (haystack, arr) {
+                    return arr.some(function (v) {
+                        return haystack.indexOf(v) >= 0;
+                    });
+                };
+
+                events.forEach(function(event) {
+                    if(event.tags) {
+                        if(findOne(event.tags, interests)) {
+                            matchedEvents.push(event);
+                        }
+                    }
+
+                });
+                response.json({events: matchedEvents});
+            }
+        });
+    }
+    else {
+        response.status(400).send('No Interests sended');
+
+    }
+
+});
+
 
 app.get('/', function(request, response) {
-    var interests = request.session.interests;
+    var interests = null;
+    if(request.session && request.session.interests) {
+        interests = request.session.interests;
+    } else if(request.body.interests) {
+        interests = request.body.interests;
+    }
     if(interests) {
         db.events.find({},{comments:0}, function (err, events) {
             if (err) {
