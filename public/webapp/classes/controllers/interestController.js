@@ -32,7 +32,7 @@ define([], function( ){
 			});
 		};
 
-		TagsService.getAll().then(
+		TagService.getAll().then(
 				function( tags ) { $scope.tags = tags;},
 				function( error ) { $scope.errorMsg = error; $scope.isError = true;}
 		);
@@ -56,7 +56,7 @@ define([], function( ){
 
 
 
-	interestController.$inject = [ '$scope', 'UserService' , 'TagsService'];
+	interestController.$inject = [ '$scope', 'UserService' , 'TagService'];
 
 	return interestController;
 });

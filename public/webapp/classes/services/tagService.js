@@ -4,7 +4,7 @@
 define([], function(){
     'use strict';
 
-    var tagsService = function($http, ConfigService, $q) {
+    var tagService = function($http, ConfigService, $q) {
         Array.prototype.isEmpty = function () { return this.length == 0; };
 
         var tags = [],
@@ -31,7 +31,7 @@ define([], function(){
         return { getAll: getAll}
     };
 
-    tagsService.$inject = [ '$http', 'ConfigService', '$q' ];
+    tagService.$inject = [ '$http', 'ConfigService', '$q' ];
 
-    return tagsService;
+    return tagService;
 });
