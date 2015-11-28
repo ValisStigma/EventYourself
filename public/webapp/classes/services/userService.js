@@ -43,6 +43,8 @@ define([], function(){
 
 			$http.post(getAPI_URL('login'), credentials)
 				.success( function ( user ) {
+					console.log("user:");
+					console.log(user);
 					interests = user.interests;
 					username = user.username;
 					def.resolve('pass')
