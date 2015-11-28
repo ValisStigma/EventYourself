@@ -4,6 +4,7 @@ require.config({
 	paths: {
 		'angular'               : 'frameworks/angular/angular',
 		'angularRoute'          : 'classes/modules/angular-route',
+		'angularCookies'        : 'classes/modules/angular-cookies',
 		'LNdK'                  : 'classes/modules/LNdK',
 		'routesConfig'          : 'classes/routesConfig',
 		'navigationController'  : 'classes/controllers/navigationController',
@@ -25,6 +26,9 @@ require.config({
 			exports: 'angular'
 		},
 		'angularRoute': {
+			deps: ['angular']
+		},
+		'angularCookies': {
 			deps: ['angular']
 		}
 	}

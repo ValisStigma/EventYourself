@@ -1,7 +1,7 @@
 define([], function(){
 	'use strict';
 
-	var userService = function($http, ConfigService, $q ) {
+	var userService = function($http, ConfigService, $q, $cookies ) {
 		Array.prototype.isEmpty = function () { return this.length == 0; };
 
 		var username = null,
@@ -9,7 +9,7 @@ define([], function(){
 			getAPI_URL = ConfigService.requestUrlCreator('api/auth');
 
 		var isLoggedIn = function ( ) {
-			return username != null;
+			return $cookies.get('username') != null;
 		};
 
 		var hasInterests = function () { return interests.length > 0; };
@@ -24,6 +24,23 @@ define([], function(){
 
 		var getUsername = function () {
 			return username;
+		};
+
+		var setUsername = function ( username ) {
+			this.username = username;
+		};
+
+		var refreshInterests = function () {
+			var def = $q.defer();
+
+			if(isLoggedIn()) {
+				$http.get(getAPI_URL('interests'))
+					.success( function ( data ) { console.log(data); def.resolve(); } )
+					.error( function () { def.refuse(); } )
+			}
+
+
+			return def.promise;
 		};
 
 		var registerUser = function( user ) {
@@ -52,17 +69,16 @@ define([], function(){
 				.error( function() { def.reject('err') });
 
 			return def.promise;
-
 		};
 
 
 
 		var isGuest = function () { return !isLoggedIn() };
 
-		return { isLoggedIn: isLoggedIn, isGuest: isGuest, login: login, registerUser: registerUser, getInterests: getInterests, hasInterests: hasInterests, setInterests: setInterests }
+		return { isLoggedIn: isLoggedIn, isGuest: isGuest, login: login, registerUser: registerUser, getInterests: getInterests, hasInterests: hasInterests, setInterests: setInterests, setUsername: setUsername, getUsername: getUsername, refreshInterests: refreshInterests}
 	};
 
-	userService.$inject = [ '$http', 'ConfigService', '$q'];
+	userService.$inject = [ '$http', 'ConfigService', '$q', '$cookies'];
 
 	return userService;
 });
