@@ -7,7 +7,7 @@ var supervisor = require('gulp-supervisor');
 
 // Compile Our Sass
 gulp.task('scss', function() {
-    return gulp.src('public/webapp/assets/scss/main.scss')
+    return gulp.src('public/webapp/assets/scss/**/*.scss')
         .pipe(scss())
         .pipe(gulp.dest('public/webapp/assets/css'));
 });
