@@ -55,28 +55,35 @@ function findEvent(id, callback) {
 
 
 app.get('/', function(request, response) {
-    var interests = request.body.interests;
-    db.events.find({},{comments:0}, function (err, events) {
-        if (err) {
-            response.json(err);
-        } else {
-            var matchedEvents = [];
+    var interests = request.session.interests;
+    if(interests) {
+        db.events.find({},{comments:0}, function (err, events) {
+            if (err) {
+                response.json(err);
+            } else {
+                var matchedEvents = [];
 
-            var findOne = function (haystack, arr) {
-                return arr.some(function (v) {
-                    return haystack.indexOf(v) >= 0;
+                var findOne = function (haystack, arr) {
+                    return arr.some(function (v) {
+                        return haystack.indexOf(v) >= 0;
+                    });
+                };
+
+                events.forEach(function(event) {
+                    if(findOne(event.tags, interests)) {
+                        matchedEvents.push(event);
+                    }
+                    event.comments = [];
                 });
-            };
+                response.json({events: matchedEvents});
+            }
+        });
+    }
+    else {
+        response.status(400).send('No Interests sended');
 
-            events.forEach(function(event) {
-                if(findOne(event.tags, interests)) {
-                    matchedEvents.push(event);
-                }
-                event.comments = [];
-            });
-            response.json({events: matchedEvents});
-        }
-    });
+    }
+
 });
 
 app.post('/', function(request, response) {
