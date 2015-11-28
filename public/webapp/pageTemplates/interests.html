@@ -13,7 +13,7 @@
                     <label for="inputUsernameLogin" class="col-md-2 control-label">Username</label>
 
                     <div class="col-md-10">
-                        <input data-ng-model="username" class="form-control" id="inputUsernameLogin" placeholder="Username" type="text">
+                        <input data-ng-model="username" class="form-control {{loginFormError ? 'error' : ''}}" id="inputUsernameLogin" placeholder="Username" type="text">
                     </div>
                     <span class="material-input"></span>
                 </div>
@@ -21,7 +21,7 @@
                     <label for="inputPasswordLogin" class="col-md-2 control-label">Password</label>
 
                     <div class="col-md-10">
-                        <input data-ng-model="password" class="form-control" id="inputPasswordLogin" placeholder="Password" type="password">
+                        <input data-ng-model="password" class="form-control {{loginFormError ? 'error' : ''}}" id="inputPasswordLogin" placeholder="Password" type="password">
                     </div>
                     <span class="material-input"></span>
                 </div>
@@ -55,8 +55,8 @@
     <div class="row" data-ng-show="!registrationActive">
         <div class="col-lg-12 button-col">
 
-            <button data-ng-show="isLoggedIn()" data-ng-click="goToEvents(true)" class="btn btn-raised btn-success {{noTagSelected()}}">Weiter</button>
-            <button data-ng-show="!isLoggedIn()" data-ng-click="goToEvents(false)" class="btn btn-raised btn-success {{noTagSelected()}}">Weiter</button>
+            <button data-ng-show="isLoggedIn()" data-ng-click="goToEvents(true)"  class="btn btn-raised btn-success {{noTagSelected() ? 'disabled' : ''}}">Weiter</button>
+            <button data-ng-show="!isLoggedIn()" data-ng-click="goToEvents(false)" class="btn btn-raised btn-success {{noTagSelected() ? 'disabled' : ''}}">Weiter</button>
         </div>
         <div data-ng-show="isLoggedIn()" class="col-xs-12 col-lg-2 col-lg-offset-0">
             <button data-ng-click="logout()" class="btn btn-raised btn-success">Logout</button>
@@ -70,7 +70,7 @@
                     <label for="inputUsernameRegistration" class="col-md-2 control-label">Username</label>
 
                     <div class="col-md-10">
-                        <input data-ng-model="username" class="form-control" id="inputUsernameRegistration" placeholder="Username" type="text">
+                        <input data-ng-model="username" class="form-control {{registerFormError ? 'error' : ''}}" id="inputUsernameRegistration" placeholder="Username" type="text">
                     </div>
                     <span class="material-input"></span>
                 </div>
@@ -78,7 +78,7 @@
                     <label for="inputPasswordRegistration" class="col-md-2 control-label">Password</label>
 
                     <div class="col-md-10">
-                        <input data-ng-model="password" class="form-control" id="inputPasswordRegistration" placeholder="Password" type="password">
+                        <input data-ng-model="password" class="form-control {{registerFormError ? 'error' : ''}}" id="inputPasswordRegistration" placeholder="Password" type="password">
                     </div>
                     <span class="material-input"></span>
                 </div>

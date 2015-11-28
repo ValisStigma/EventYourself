@@ -3,6 +3,9 @@ define([], function( ){
 
 	function interestController( $scope, UserService, TagService, $location, $cookies ){
 		$scope.selectedInterests = [];
+		$scope.loginFormError = false;
+		$scope.registerFormError = false;
+
 
 		var interestAlreadySelected = function( id ) {
 			return $scope.selectedInterests.indexOf(id) >= 0;
@@ -25,12 +28,16 @@ define([], function( ){
 				username: $scope.username,
 				password: $scope.password
 			};
+
+			if(!credentials.username || !credentials.password) {
+				$scope.loginFormError = true;
+				return;
+			}
 			UserService.login( credentials ).then(function( msg ) {
-				console.log('successfully logged in');
 				$cookies.put('username', $scope.username);
-				$location.path('/')
+				$location.path('/');
 			}, function (msg) {
-				alert(msg)
+				console.log('login error');
 			});
 		};
 
@@ -39,6 +46,10 @@ define([], function( ){
 		};
 
 		$scope.toggleTagSelection = function ( id ) {
+			if(typeof $scope.selectedInterests == 'string') {
+				$scope.selectedInterests = $scope.selectedInterests.split(',');
+			}
+
 			if(interestAlreadySelected(id)) {
 				removeInterest(id);
 			} else {
@@ -47,7 +58,7 @@ define([], function( ){
 		};
 
 		TagService.getAll().then(
-				function( tags ) { $scope.tags = tags;},
+				function( tags ) {$scope.tags = tags;},
 				function( error ) { $scope.errorMsg = error; $scope.isError = true;}
 		);
 
@@ -58,11 +69,15 @@ define([], function( ){
 				interests: $scope.selectedInterests
 			};
 
+			if(!user.username || !user.password || !user.interests) {
+				$scope.registerFormError = true;
+				return;
+			}
+
 			UserService.registerUser(user).then(function( msg ) {
-				alert(msg);
 				$scope.login();
 			}, function (msg) {
-				alert(msg)
+				console.log(msg);
 			});
 
 
@@ -77,6 +92,8 @@ define([], function( ){
 		};
 
 		$scope.goToEvents = function ( forced ) {
+			if($scope.noTagSelected()) return;
+
 			if(forced) {
 				$cookies.put('interests', $scope.selectedInterests);
 				$location.path('/');
@@ -90,7 +107,7 @@ define([], function( ){
 
 		$scope.logout = function () {
 			UserService.logout();
-			$location.path('interests');
+			$location.path('/');
 		};
 
 		$scope.isLoggedIn = function () {
@@ -102,8 +119,8 @@ define([], function( ){
 
 		}
 
-		$scope.noTagSelected = function () { return $scope.selectedInterests.length == 0 ? 'disabled' : ''; }
-		$scope.forceToEventsFlag = function () { return $scope.isLoggedIn() == 0 }
+		$scope.noTagSelected = function () { return $scope.selectedInterests.length == 0; };
+		$scope.forceToEventsFlag = function () { return $scope.isLoggedIn() == 0 };
 	}
 
 

@@ -6325,7 +6325,7 @@ fieldset[disabled][disabled] .btn, .btn.disabled, .btn:disabled, .btn[disabled][
     margin-left: 6px;
     width: 0;
     height: 0;
-    box-shadow: 0 0 0 0, 0 0 0 0, 0 0 0 0, 0 0 0 0, 0 0 0 0, 0 0 0 0, 0 0 0 0 inset;
+    box-shadow: 0 0 0 0, 0 0 0 0, 0 0 0 0, 0 0 0 0, 0 0 0 0, 0 0 0 0, 0 0 0 0 inset;
     animation: checkbox-off 0.3s forwards; }
 
 .checkbox input[type=checkbox]:focus + .checkbox-material .check:after {
@@ -6337,7 +6337,7 @@ fieldset[disabled][disabled] .btn, .btn.disabled, .btn:disabled, .btn[disabled][
 
 .checkbox input[type=checkbox]:checked + .checkbox-material .check:before {
   color: #4caf50;
-  box-shadow: 0 0 0 10px, 10px -10px 0 10px, 32px 0 0 20px, 0px 32px 0 20px, -5px 5px 0 10px, 20px -12px 0 11px;
+  box-shadow: 0 0 0 10px, 10px -10px 0 10px, 32px 0 0 20px, 0px 32px 0 20px, -5px 5px 0 10px, 20px -12px 0 11px;
   animation: checkbox-on 0.3s forwards; }
 
 .checkbox input[type=checkbox]:checked + .checkbox-material:before {
@@ -6365,38 +6365,38 @@ fieldset[disabled] .checkbox input[type=checkbox],
 
 @keyframes checkbox-on {
   0% {
-    box-shadow: 0 0 0 10px, 10px -10px 0 10px, 32px 0 0 20px, 0px 32px 0 20px, -5px 5px 0 10px, 15px 2px 0 11px; }
+    box-shadow: 0 0 0 10px, 10px -10px 0 10px, 32px 0 0 20px, 0px 32px 0 20px, -5px 5px 0 10px, 15px 2px 0 11px; }
   50% {
-    box-shadow: 0 0 0 10px, 10px -10px 0 10px, 32px 0 0 20px, 0px 32px 0 20px, -5px 5px 0 10px, 20px 2px 0 11px; }
+    box-shadow: 0 0 0 10px, 10px -10px 0 10px, 32px 0 0 20px, 0px 32px 0 20px, -5px 5px 0 10px, 20px 2px 0 11px; }
   100% {
-    box-shadow: 0 0 0 10px, 10px -10px 0 10px, 32px 0 0 20px, 0px 32px 0 20px, -5px 5px 0 10px, 20px -12px 0 11px; } }
+    box-shadow: 0 0 0 10px, 10px -10px 0 10px, 32px 0 0 20px, 0px 32px 0 20px, -5px 5px 0 10px, 20px -12px 0 11px; } }
 
 @keyframes checkbox-off {
   0% {
-    box-shadow: 0 0 0 10px, 10px -10px 0 10px, 32px 0 0 20px, 0px 32px 0 20px, -5px 5px 0 10px, 20px -12px 0 11px, 0 0 0 0 inset; }
+    box-shadow: 0 0 0 10px, 10px -10px 0 10px, 32px 0 0 20px, 0px 32px 0 20px, -5px 5px 0 10px, 20px -12px 0 11px, 0 0 0 0 inset; }
   25% {
-    box-shadow: 0 0 0 10px, 10px -10px 0 10px, 32px 0 0 20px, 0px 32px 0 20px, -5px 5px 0 10px, 20px -12px 0 11px, 0 0 0 0 inset; }
+    box-shadow: 0 0 0 10px, 10px -10px 0 10px, 32px 0 0 20px, 0px 32px 0 20px, -5px 5px 0 10px, 20px -12px 0 11px, 0 0 0 0 inset; }
   50% {
     transform: rotate(45deg);
     margin-top: -4px;
     margin-left: 6px;
     width: 0;
     height: 0;
-    box-shadow: 0 0 0 10px, 10px -10px 0 10px, 32px 0 0 20px, 0px 32px 0 20px, -5px 5px 0 10px, 15px 2px 0 11px, 0 0 0 0 inset; }
+    box-shadow: 0 0 0 10px, 10px -10px 0 10px, 32px 0 0 20px, 0px 32px 0 20px, -5px 5px 0 10px, 15px 2px 0 11px, 0 0 0 0 inset; }
   51% {
     transform: rotate(0deg);
     margin-top: -2px;
     margin-left: -2px;
     width: 20px;
     height: 20px;
-    box-shadow: 0 0 0 0, 0 0 0 0, 0 0 0 0, 0 0 0 0, 0 0 0 0, 0 0 0 0, 0px 0 0 10px inset; }
+    box-shadow: 0 0 0 0, 0 0 0 0, 0 0 0 0, 0 0 0 0, 0 0 0 0, 0 0 0 0, 0px 0 0 10px inset; }
   100% {
     transform: rotate(0deg);
     margin-top: -2px;
     margin-left: -2px;
     width: 20px;
     height: 20px;
-    box-shadow: 0 0 0 0, 0 0 0 0, 0 0 0 0, 0 0 0 0, 0 0 0 0, 0 0 0 0, 0px 0 0 0 inset; } }
+    box-shadow: 0 0 0 0, 0 0 0 0, 0 0 0 0, 0 0 0 0, 0 0 0 0, 0 0 0 0, 0px 0 0 0 inset; } }
 
 @keyframes rippleOn {
   0% {
@@ -8172,29 +8172,13 @@ hr.on-light {
 .event-detail-body {
   background-color: rgba(0, 0, 0, 0.58);
   padding: 20px; }
-  .event-detail-body .panel-body {
-    padding-top: 0; }
-  .event-detail-body h1 {
-    margin-top: 0; }
-  .event-detail-body a {
-    margin-bottom: 15px; }
-
-.button-row {
-  margin-top: 15px; }
-
-.tag {
-  padding: 5px;
-  background-color: rgba(171, 168, 168, 0.41);
-  border-radius: 5px;
-  margin-right: 5px; }
-
-a {
-  margin-bottom: 15px; }
 
 body {
   background-image: url("../../assets/images/mountain.jpg");
   background-repeat: no-repeat;
-  background-attachment: fixed; }
+  background-attachment: fixed;
+  background-size: 100%;
+}
 
 img {
   max-width: 100%; }
@@ -8249,3 +8233,6 @@ img {
   margin-right: 0; }
   .form-row .form-group {
     margin: 5px 0 0 0; }
+    .form-row .form-group .form-control.error {
+      border: 1px solid red;
+      border-radius: 7px; }
