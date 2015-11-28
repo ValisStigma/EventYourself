@@ -5,13 +5,20 @@ img {
 
 
 .event-list-item {
-  margin-bottom:15px;
+  @media screen and (min-width: 600px) {
+    margin-bottom:15px;
+
+    min-height:180px;
+  }
   .row {
     margin-left:0;
     margin-right:0;
   }
   .inner-event {
     background-color:white;
+    h3 {
+      margin-top:5px;
+    }
     a {
       display:flex;
       align-items: center;

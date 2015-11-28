@@ -10,7 +10,7 @@
                     <a href="#/eventDetail/{{event._id}}">
 
                     <div class="col-xs-3  img-container">
-                        <img data-ng-src="{{getImagePath(event.picture)}}" alt="event-image">
+                        <img data-ng-show="event.picture" data-ng-src="{{getImagePath(event.picture)}}" alt="event-image">
                     </div>
                     <div class="col-xs-9 description-col">
                         <h3>{{event.name}}</h3>

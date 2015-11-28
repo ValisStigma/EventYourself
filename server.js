@@ -14,6 +14,7 @@ var uuid = require('uuid');
 var events = require('./server_routes/events');
 var feedback = require('./server_routes/feedback');
 var login = require('./server_routes/login');
+var tags = require('./server_routes/tags');
 
 var allowCrossDomain = function(request, response, next) {
     response.header('Access-Control-Allow-Origin', '*');
@@ -43,6 +44,7 @@ app.use(session({
 app.use('/api/events', events);
 app.use('/api/feedback', feedback);
 app.use('/api/auth', login);
+app.use('/api/tags', tags);
 
 app.on("connection", function (socket) {
 	socket.setNoDelay(true);

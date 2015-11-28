@@ -1,7 +1,7 @@
 define([], function( ){
 	'use strict';
 
-	function interestController( $scope, UserService ){
+	function interestController( $scope, UserService, TagService ){
 		$scope.selectedInterests = [];
 
 		var interestAlreadySelected = function( id ) {
@@ -32,6 +32,11 @@ define([], function( ){
 			});
 		};
 
+		TagsService.getAll().then(
+				function( tags ) { $scope.tags = tags;},
+				function( error ) { $scope.errorMsg = error; $scope.isError = true;}
+		);
+
 		$scope.register = function () {
 			var user = {
 				username: $scope.username,
@@ -51,7 +56,7 @@ define([], function( ){
 
 
 
-	interestController.$inject = [ '$scope', 'UserService' ];
+	interestController.$inject = [ '$scope', 'UserService' , 'TagsService'];
 
 	return interestController;
 });

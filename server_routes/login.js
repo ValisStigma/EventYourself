@@ -97,6 +97,8 @@ function checkUser(res, username, password, req) {
                 req.session.isLoggedIn = true;
                 req.session.username = username;
                 req.session.userId = doc._id;
+                data.username = username;
+                data.interests = doc.interests;
                 if (isAdmin(doc._id)) {
                     req.session.isAdmin = true;
                 }
