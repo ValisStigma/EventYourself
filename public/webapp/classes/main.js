@@ -15,7 +15,8 @@ require.config({
 		'ConfigService'         : 'classes/services/configService',
 		'EventsService'         : 'classes/services/eventsService',
 		'UserService'           : 'classes/services/userService',
-		'FeedbackService'       : 'classes/services/feedbackService'
+		'FeedbackService'       : 'classes/services/feedbackService',
+		'TagsService'			: 'classes/service/tagService'
 	},
 
 	// angular does not support async loading out of the box -> use the shim loader
