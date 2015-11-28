@@ -13,7 +13,7 @@ function isAdmin(userId) {
     return false;
 }
 
-function register(res, username, password, next) {
+function register(res, username, password, interests ,next) {
     "use strict";
     var data = {
         success: true,
@@ -24,7 +24,8 @@ function register(res, username, password, next) {
     if (check.isLength(username, 3) && check.isLength(password, 3)) {
         var newUser = {
             username: username,
-            password: hash.generate(password)
+            password: hash.generate(password),
+            interests: interests
         };
         db.users.findOne({username: newUser.username}, function (err, doc) {
             if (err) {
@@ -97,7 +98,7 @@ app.post('/login', function (req, res, next) {
 });
 app.put('/register', function (req, res, next) {
     "use strict";
-    register(res, req.body.username, req.body.password, next);
+    register(res, req.body.username, req.body.password, req.body.interests ,next);
 });
 app.get('/', function (req, res) {
     "use strict";
