@@ -23,8 +23,6 @@ function getInterests(req, res, next) {
 
         }
         else {
-            req.session.isLoggedIn = true;
-            req.session.username = username;
             req.session.userId = doc._id;
             if (isAdmin(doc._id)) {
                 req.session.isAdmin = true;

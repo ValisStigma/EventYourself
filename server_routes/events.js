@@ -55,7 +55,7 @@ function findEvent(id, callback) {
 
 
 app.get('/', function(request, response) {
-    var interests = request.body.interests;
+    var interests = request.session.interests;
     if(interests) {
         db.events.find({},{comments:0}, function (err, events) {
             if (err) {
