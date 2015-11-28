@@ -1,0 +1,24 @@
+.event-img {
+  max-width: 100%; }
+
+.event-detail-body {
+  background-color: rgba(0, 0, 0, 0.58);
+  padding: 20px; }
+  .event-detail-body .panel-body {
+    padding-top: 0; }
+  .event-detail-body h1 {
+    margin-top: 0; }
+  .event-detail-body a {
+    margin-bottom: 15px; }
+
+.button-row {
+  margin-top: 15px; }
+
+.tag {
+  padding: 5px;
+  background-color: rgba(171, 168, 168, 0.41);
+  border-radius: 5px;
+  margin-right: 5px; }
+
+a {
+  margin-bottom: 15px; }

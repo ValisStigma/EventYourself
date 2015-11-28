@@ -1,0 +1,21 @@
+img {
+  max-width: 100%; }
+
+@media screen and (min-width: 600px) {
+  .event-list-item {
+    margin-bottom: 15px;
+    min-height: 180px; } }
+
+.event-list-item .row {
+  margin-left: 0;
+  margin-right: 0; }
+
+.event-list-item .inner-event {
+  background-color: white; }
+  .event-list-item .inner-event h3 {
+    margin-top: 5px; }
+  .event-list-item .inner-event a {
+    display: flex;
+    align-items: center;
+    color: #333;
+    text-decoration: none; }
