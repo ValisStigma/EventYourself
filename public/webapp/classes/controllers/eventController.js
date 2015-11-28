@@ -13,7 +13,9 @@ define([], function( ){
 			var interests = $cookies.get('interests');
 			if(typeof interests == 'string') { interests = interests.split(','); }
 			EventsService.getEventsByTagNames(interests)
-				.then(function (events) { $scope.events = events; });
+				.then(function (events) {
+					$scope.events = events.events;
+				});
 		} else {
 			$location.path('interests');
 		}

@@ -55,9 +55,7 @@ function findEvent(id, callback) {
 
 app.post('/getByTagNames', nocache, function(request, response) {
     var interests = null;
-    if(request.session && request.session.interests) {
-        interests = request.session.interests;
-    } else if(request.body.interests) {
+    if(request.body.interests) {
         interests = request.body.interests;
     }
     if(interests) {
@@ -68,14 +66,18 @@ app.post('/getByTagNames', nocache, function(request, response) {
                 var matchedEvents = [];
 
                 var findOne = function (haystack, arr) {
-                    return arr.some(function (v) {
-                        return haystack.indexOf(v) >= 0;
-                    });
+                    for(var i = 0; i < haystack.length; i++) {
+                        for(var j = 0; j < arr.length; j++) {
+                            if(haystack[i].Name == arr[j]) {
+                                return true;
+                            }
+                        }
+                    }
+                    return false;
                 };
-
                 events.forEach(function(event) {
                     if(event.tags) {
-                        if(findOne(event.tags.Name, interests)) {
+                        if(findOne(event.tags, interests)) {
                             matchedEvents.push(event);
                         }
                     }
