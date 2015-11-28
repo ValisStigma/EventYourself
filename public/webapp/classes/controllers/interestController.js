@@ -16,7 +16,7 @@ define([], function( ){
 
 		var removeInterest = function ( id ) {
 			if(interestAlreadySelected(id)) {
-				array.splice($scope.selectedInterests.indexOf(id), 1);
+				$scope.selectedInterests.splice($scope.selectedInterests.indexOf(id), 1);
 			}
 		};
 
