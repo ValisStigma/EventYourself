@@ -14,11 +14,13 @@ function isAdmin(userId) {
 }
 
 function getInterests(req, res, next) {
+    var data = {};
     db.users.findOne({username: req.session.username}, function (err, doc) {
-        if (err || doc === null) {
+        if (err || doc === null || !doc.interests) {
             data.success = false;
             req.session.isLoggedIn = false;
-            res.send(JSON.stringify(data));
+            res.status(400).send("user not in database or no interests");
+
         }
         else {
             req.session.isLoggedIn = true;
