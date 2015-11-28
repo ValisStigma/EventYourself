@@ -68,9 +68,11 @@ define([], function( ){
 		};
 		$scope.enableLogin = function() {
 			$scope.loginActive = true;
+			$scope.registrationActive = false;
 		};
 		$scope.enableRegistration = function() {
 			$scope.registrationActive = true;
+			$scope.loginActive = false;
 		};
 
 		$scope.goToEvents = function ( forced ) {
@@ -80,7 +82,9 @@ define([], function( ){
 			}
 
 			if(UserService.isGuest()) {
-				$scope.showRegisterForm = true;
+				$scope.loginActive = false;
+				$scope.registrationActive = true;
+				console.log('hhu')
 			}
 		};
 	}
