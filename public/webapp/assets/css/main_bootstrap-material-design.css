@@ -8176,7 +8176,9 @@ hr.on-light {
 body {
   background-image: url("../../assets/images/mountain.jpg");
   background-repeat: no-repeat;
-  background-attachment: fixed; }
+  background-attachment: fixed;
+  background-size: 100%;
+}
 
 img {
   max-width: 100%; }

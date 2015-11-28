@@ -7,7 +7,6 @@ define([], function( ){
 		$scope.registerFormError = false;
 
 
-
 		var interestAlreadySelected = function( id ) {
 			return $scope.selectedInterests.indexOf(id) >= 0;
 		};
@@ -36,9 +35,9 @@ define([], function( ){
 			}
 			UserService.login( credentials ).then(function( msg ) {
 				$cookies.put('username', $scope.username);
-				$location.path('/')
+				$location.path('/');
 			}, function (msg) {
-				alert(msg)
+				console.log('login error');
 			});
 		};
 
@@ -47,6 +46,10 @@ define([], function( ){
 		};
 
 		$scope.toggleTagSelection = function ( id ) {
+			if(typeof $scope.selectedInterests == 'string') {
+				$scope.selectedInterests = $scope.selectedInterests.split(',');
+			}
+
 			if(interestAlreadySelected(id)) {
 				removeInterest(id);
 			} else {
@@ -55,7 +58,7 @@ define([], function( ){
 		};
 
 		TagService.getAll().then(
-				function( tags ) { $scope.tags = tags;},
+				function( tags ) {$scope.tags = tags;},
 				function( error ) { $scope.errorMsg = error; $scope.isError = true;}
 		);
 
