@@ -5,17 +5,18 @@
 
 
     <div class="row events-container">
-        <div data-ng-repeat="event in events | orderBy:'order'" class="event-list-item col-xs-12 col-sm-12 col-md-6 col-lg-6">
+        <div data-ng-repeat="event in events" class="event-list-item col-xs-12 col-sm-12 col-md-6 col-lg-6">
                 <div class="row inner-event">
                     <a href="#/eventDetail/{{event._id}}">
 
                     <div class="col-xs-3  img-container">
-                        <img data-ng-show="event.picture" data-ng-src="{{getImagePath(event.picture)}}" alt="event-image">
+                            <img class="event-img" data-ng-show="event.picture != undefined" src="{{ event.picture && getImagePath(event.picture) }}" alt="event image">
+                            <img class="event-img" data-ng-show="event.picture == undefined" src="/assets/images/events/generic.jpg" alt="event-image">
                     </div>
                     <div class="col-xs-9 description-col">
-                        <h3>{{event.name}}</h3>
-                        <p><span class="glyphicon glyphicon-time event-info-icon"></span> {{event.startTime | date: 'HH:mm'}} - {{event.endTime | date: 'HH:mm'}}</p>
-                        <p><span class="glyphicon glyphicon-pushpin event-info-icon"></span> {{event.location}}</p>
+                        <h3>{{event.title}}</h3>
+                        <p><span class="glyphicon glyphicon-time event-info-icon"></span> {{event.time}} </p>
+                        <p><span class="glyphicon glyphicon-pushpin event-info-icon"></span> {{event.place}}</p>
                     </div>
                     </a>
 
@@ -26,7 +27,12 @@
 
         </div>
 
-        <div class="col-xs-12 col-lg-2 col-lg-offset-0">
+
+    </div>
+    <div class="row">
+
+
+        <div class="col-xs-12 col-lg-12 col-lg-offset-0">
             <button data-ng-click="logout()" class="btn btn-raised btn-success">Logout</button>
         </div>
     </div>

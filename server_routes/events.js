@@ -53,7 +53,7 @@ function findEvent(id, callback) {
     })
 }
 
-app.post('/getByTagNames', function(request, response) {
+app.post('/getByTagNames', nocache, function(request, response) {
     var interests = null;
     if(request.session && request.session.interests) {
         interests = request.session.interests;
@@ -75,7 +75,7 @@ app.post('/getByTagNames', function(request, response) {
 
                 events.forEach(function(event) {
                     if(event.tags) {
-                        if(findOne(event.tags, interests)) {
+                        if(findOne(event.tags.Name, interests)) {
                             matchedEvents.push(event);
                         }
                     }
@@ -93,7 +93,7 @@ app.post('/getByTagNames', function(request, response) {
 });
 
 
-app.get('/', function(request, response) {
+app.get('/', nocache, function(request, response) {
     var interests = null;
     if(request.session && request.session.interests) {
         interests = request.session.interests;
@@ -108,11 +108,15 @@ app.get('/', function(request, response) {
                 var matchedEvents = [];
 
                 var findOne = function (haystack, arr) {
-                    return arr.some(function (v) {
-                        return haystack.indexOf(v) >= 0;
-                    });
+                    for(var i = 0; i < haystack.length; i++) {
+                        for(var j = 0; j < arr.length; j++) {
+                            if(haystack[i].Name == arr[j]) {
+                                return true;
+                            }
+                        }
+                    }
+                    return false;
                 };
-
                 events.forEach(function(event) {
                     if(event.tags) {
                         if(findOne(event.tags, interests)) {
@@ -159,16 +163,16 @@ app.get('/:id', function(request, response) {
     findEvent(request.params.id, function(event) {
         if (event) {
             response.json({
-                name:event.name,
+                title:event.title,
                 description: event.description,
-                startTime: event.startTime,
+                time: event.time,
                 endTime: event.endTime,
                 category: event.category,
                 picture: event.picture,
                 period: event.period,
                 rating: event.rating,
                 sponsor: event.sponsor,
-                location: event.location,
+                place: event.place,
                 order: event.order,
                 comments: [],
                 tags: event.tags
