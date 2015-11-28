@@ -8,13 +8,13 @@ define([], function( ){
 			return $scope.selectedInterests.indexOf(id) >= 0;
 		};
 
-		$scope.addInterest = function ( id ) {
+		var addInterest = function ( id ) {
 			if(!interestAlreadySelected(id)) {
 				$scope.selectedInterests.push(id);
 			}
 		};
 
-		$scope.removeInterest = function ( id ) {
+		var removeInterest = function ( id ) {
 			if(interestAlreadySelected(id)) {
 				array.splice($scope.selectedInterests.indexOf(id), 1);
 			}
@@ -34,6 +34,14 @@ define([], function( ){
 
 		$scope.tagIsSelected = function ( id ) {
 			return interestAlreadySelected(id) ? 'selected' : '';
+		};
+
+		$scope.toggleTagSelection = function ( id ) {
+			if(interestAlreadySelected(id)) {
+				removeInterest(id);
+			} else {
+				addInterest(id);
+			}
 		};
 
 		TagService.getAll().then(
