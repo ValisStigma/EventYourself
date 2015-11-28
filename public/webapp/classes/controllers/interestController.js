@@ -1,7 +1,7 @@
 define([], function( ){
 	'use strict';
 
-	function interestController( $scope, UserService, TagService ){
+	function interestController( $scope, UserService, TagService, $location ){
 		$scope.selectedInterests = [];
 
 		var interestAlreadySelected = function( id ) {
@@ -26,7 +26,8 @@ define([], function( ){
 				password: $scope.password
 			};
 			UserService.login( credentials ).then(function( msg ) {
-				alert(msg)
+				console.log('successfully logged in');
+				$location.path('/')
 			}, function (msg) {
 				alert(msg)
 			});
@@ -90,7 +91,7 @@ define([], function( ){
 
 
 
-	interestController.$inject = [ '$scope', 'UserService' , 'TagService'];
+	interestController.$inject = [ '$scope', 'UserService' , 'TagService', '$location'];
 
 	return interestController;
 });
