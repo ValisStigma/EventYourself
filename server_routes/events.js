@@ -70,10 +70,12 @@ app.get('/', function(request, response) {
                 };
 
                 events.forEach(function(event) {
-                    if(findOne(event.tags, interests)) {
-                        matchedEvents.push(event);
+                    if(event.tags) {
+                        if(findOne(event.tags, interests)) {
+                            matchedEvents.push(event);
+                        }
                     }
-                    event.comments = [];
+
                 });
                 response.json({events: matchedEvents});
             }
