@@ -62,8 +62,17 @@ define([], function( ){
 			}, function (msg) {
 				alert(msg)
 			});
+		};
 
+		$scope.goToEvents = function ( forced ) {
+			if(forced) {
+				UserService.setInterests($scope.interests);
+				$location('events');
+			}
 
+			if(UserService.isGuest()) {
+				$scope.showRegisterForm = true;
+			}
 		};
 	}
 
