@@ -19,7 +19,7 @@ define([], function(){
 		};
 
 		var getInterests = function () {
-			if(isLoggedIn()) return $cookies.get('interests');
+			if(isLoggedIn()) return $cookies.get('interests').split(',');
 			return null;
 		};
 
@@ -82,11 +82,24 @@ define([], function(){
 			username = null;
 		};
 
+		var updateUser = function () {
+			var def = $q.defer();
+			var user = {
+				username: getUsername(),
+				interests: getInterests()
+			};
+
+			$http.post(getAPI_URL('updateUser'), user)
+				.success(function ( data ) { def.resolve( data ); })
+				.error(function ( data ) { def.reject( data ); });
+
+			return def.promise;
+		};
 		var isGuest = function () { return !isLoggedIn() };
 		var isGuestWithInterests = function () { return !$cookies.get('username') && $cookies.get('interests') };
 
 
-		return { isLoggedIn: isLoggedIn, isGuest: isGuest, login: login, registerUser: registerUser, getInterests: getInterests, hasInterests: hasInterests, setInterests: setInterests, setUsername: setUsername, getUsername: getUsername, refreshInterests: refreshInterests, isGuestWithInterests: isGuestWithInterests, logout:logout}
+		return { isLoggedIn: isLoggedIn, isGuest: isGuest, login: login, registerUser: registerUser, getInterests: getInterests, hasInterests: hasInterests, setInterests: setInterests, setUsername: setUsername, getUsername: getUsername, refreshInterests: refreshInterests, isGuestWithInterests: isGuestWithInterests, logout:logout, updateUser: updateUser}
 	};
 
 	userService.$inject = [ '$http', 'ConfigService', '$q', '$cookies'];

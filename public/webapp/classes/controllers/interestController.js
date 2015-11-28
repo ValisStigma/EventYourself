@@ -96,6 +96,7 @@ define([], function( ){
 
 			if(forced) {
 				$cookies.put('interests', $scope.selectedInterests);
+				UserService.updateUser();
 				$location.path('/');
 			}
 

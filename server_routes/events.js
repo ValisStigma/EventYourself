@@ -1,6 +1,6 @@
 var express = require('express');
 var collections = ['events'];
-var dburi = 'mongodb://rolf:StartUp15@ds059644.mongolab.com:59644/heroku_4ph3bdfk';
+var dburi = 'LNdK';
 var mongojs = require('mongojs');
 var db = mongojs(dburi, collections);
 var app = express();
