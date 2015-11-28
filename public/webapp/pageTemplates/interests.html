@@ -5,7 +5,7 @@
         </div>
 
     </div>
-    <div class="row form-row" data-ng-show="loginActive">
+    <div class="row form-row" data-ng-show="loginActive && !registrationActive">
         <div class="col-xs-12 form-col">
         <div class="form-horizontal">
             <div class=" col-xs-12 col-md-6 form-group is-empty">
@@ -17,7 +17,7 @@
                 <span class="material-input"></span>
             </div>
             <div class=" col-xs-12 col-md-6 form-group is-empty">
-                <label for="inputPasswordLogin" class="col-md-2 control-label">Email</label>
+                <label for="inputPasswordLogin" class="col-md-2 control-label">Password</label>
 
                 <div class="col-md-10">
                     <input data-ng-model="password" class="form-control" id="inputPasswordLogin" placeholder="Password" type="password">
@@ -51,11 +51,11 @@
 
     <div class="row" data-ng-show="!registrationActive">
         <div class="col-lg-12 button-col">
-            <button data-ng-click="goToEvents()" class="btn btn-raised btn-success">Weiter</button>
+            <button data-ng-click="goToEvents(false)" class="btn btn-raised btn-success">Weiter</button>
         </div>
 
     </div>
-    <div class="row form-row" data-ng-show="registrationActive">
+    <div class="row form-row" data-ng-show="registrationActive && !loginActive">
         <div class="col-xs-12 form-col">
             <div class="form-horizontal">
                 <div class=" col-xs-12 col-md-6 form-group is-empty">
@@ -67,15 +67,19 @@
                     <span class="material-input"></span>
                 </div>
                 <div class=" col-xs-12 col-md-6 form-group is-empty">
-                    <label for="inputPasswordRegistration" class="col-md-2 control-label">Email</label>
+                    <label for="inputPasswordRegistration" class="col-md-2 control-label">Password</label>
 
                     <div class="col-md-10">
                         <input data-ng-model="password" class="form-control" id="inputPasswordRegistration" placeholder="Password" type="password">
                     </div>
                     <span class="material-input"></span>
                 </div>
-                <div class="col-xs-12 col-lg-2 col-lg-offset-10">
-                    <button data-ng-click="registration()" class="btn btn-raised btn-success">Registration</button>
+                <div class="col-xs-12 col-lg-3 col-lg-offset-7">
+                    <button data-ng-click="goToEvents(true)" class="btn btn-raised btn-warning">Nein danke</button>
+
+                </div>
+                <div class="col-xs-12 col-lg-2 col-lg-offset-0">
+                    <button data-ng-click="register()" class="btn btn-raised btn-success">Registration</button>
                 </div>
             </div>
         </div>
