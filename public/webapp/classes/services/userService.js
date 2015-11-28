@@ -4,55 +4,27 @@ define([], function(){
 	var userService = function($http, ConfigService, $q, $cookies ) {
 		Array.prototype.isEmpty = function () { return this.length == 0; };
 
-		var username = null,
-			interests = [],
-			getAPI_URL = ConfigService.requestUrlCreator('api/auth');
+		var getAPI_URL = ConfigService.requestUrlCreator('api/auth');
 
-		var isLoggedIn = function ( ) {
-			return $cookies.get('username') != null;
-		};
+		var isLoggedIn = function ( ) { return $cookies.get('username') != null; };
 
-		var hasInterests = function () { return interests.length > 0; };
-
-		var setInterests = function ( interests ) {
-			this.interests = interests;
-		};
+		var setInterests = function ( interests ) { $cookies.put('interests', interests); };
 
 		var getInterests = function () {
-			if(isLoggedIn()) return $cookies.get('interests').split(',');
-			return null;
+			var interests = $cookies.get('interests');
+			return interests ? interests.split(',') : null;
 		};
 
-		var getUsername = function () {
-			if(isLoggedIn()) return $cookies.get('username');
-			return null;
-		};
+		var getUsername = function () { return $cookies.get('username'); };
 
-		var setUsername = function ( username ) {
-			this.username = username;
-		};
-
-		var refreshInterests = function () {
-			var def = $q.defer();
-
-			if(isLoggedIn()) {
-				$http.get(getAPI_URL('interests'))
-					.success( function ( data ) { console.log(data); def.resolve(); } )
-					.error( function () { def.refuse(); } )
-			}
-
-
-			return def.promise;
-		};
+		var setUsername = function ( username ) { $cookies.put('username', username); };
 
 		var registerUser = function( user ) {
 			var def = $q.defer();
 
 			$http.put(getAPI_URL('register'), user)
-				.success( function() {
-					def.resolve('passd')
-				})
-				.error(function() { def.reject('err') });
+				.success( function ( data ) { def.resolve( data ); })
+				.error(function ( data ) { def.reject( data ) });
 
 			return def.promise;
 		};
@@ -62,15 +34,11 @@ define([], function(){
 
 			$http.post(getAPI_URL('login'), credentials)
 				.success( function ( user ) {
-					console.log("user:");
-					console.log(user);
-					interests = user.interests;
-					username = user.username;
-					$cookies.put('username', username);
-					$cookies.put('interests', interests);
-					def.resolve('pass')
+					setInterests(user.interests);
+					setUsername(user.username);
+					def.resolve( user );
 				})
-				.error( function() { def.reject('err') });
+				.error( function ( data ) { def.reject( data ) });
 
 			return def.promise;
 		};
@@ -78,8 +46,6 @@ define([], function(){
 		var logout = function () {
 			$cookies.remove('interests');
 			$cookies.remove('username');
-			interests = [];
-			username = null;
 		};
 
 		var updateUser = function () {
@@ -89,17 +55,17 @@ define([], function(){
 				interests: getInterests()
 			};
 
-			$http.post(getAPI_URL('updateUser'), user)
+			$http.post(getAPI_URL('user/update'), user)
 				.success(function ( data ) { def.resolve( data ); })
 				.error(function ( data ) { def.reject( data ); });
 
 			return def.promise;
 		};
 		var isGuest = function () { return !isLoggedIn() };
-		var isGuestWithInterests = function () { return !$cookies.get('username') && $cookies.get('interests') };
+		var isGuestWithInterests = function () { return !getUsername() && getInterests() };
 
 
-		return { isLoggedIn: isLoggedIn, isGuest: isGuest, login: login, registerUser: registerUser, getInterests: getInterests, hasInterests: hasInterests, setInterests: setInterests, setUsername: setUsername, getUsername: getUsername, refreshInterests: refreshInterests, isGuestWithInterests: isGuestWithInterests, logout:logout, updateUser: updateUser}
+		return { isLoggedIn: isLoggedIn, isGuest: isGuest, login: login, registerUser: registerUser, getInterests: getInterests, setInterests: setInterests, setUsername: setUsername, getUsername: getUsername, isGuestWithInterests: isGuestWithInterests, logout:logout, updateUser: updateUser}
 	};
 
 	userService.$inject = [ '$http', 'ConfigService', '$q', '$cookies'];

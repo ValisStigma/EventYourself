@@ -7,21 +7,11 @@ define([], function( ){
 		$scope.registerFormError = false;
 
 
-		var interestAlreadySelected = function( id ) {
-			return $scope.selectedInterests.indexOf(id) >= 0;
-		};
+		var interestAlreadySelected = function( id ) { return $scope.selectedInterests.indexOf(id) >= 0; };
 
-		var addInterest = function ( id ) {
-			if(!interestAlreadySelected(id)) {
-				$scope.selectedInterests.push(id);
-			}
-		};
+		var addInterest = function ( id ) { $scope.selectedInterests.push(id); };
 
-		var removeInterest = function ( id ) {
-			if(interestAlreadySelected(id)) {
-				$scope.selectedInterests.splice($scope.selectedInterests.indexOf(id), 1);
-			}
-		};
+		var removeInterest = function ( id ) { $scope.selectedInterests.splice($scope.selectedInterests.indexOf(id), 1); };
 
 		$scope.login = function () {
 			var credentials = {
@@ -33,22 +23,21 @@ define([], function( ){
 				$scope.loginFormError = true;
 				return;
 			}
-			UserService.login( credentials ).then(function( msg ) {
-				$cookies.put('username', $scope.username);
+
+			UserService.login( credentials ).then(function( data ) {
+				UserService.setUsername($scope.username);
 				$location.path('/');
-			}, function (msg) {
+			}, function ( data ) {
 				console.log('login error');
 			});
 		};
 
-		$scope.tagIsSelected = function ( id ) {
-			return interestAlreadySelected(id) ? 'selected' : '';
-		};
+		$scope.tagIsSelected = function ( id ) { return interestAlreadySelected(id) ? 'selected' : ''; };
 
 		$scope.toggleTagSelection = function ( id ) {
-			if(typeof $scope.selectedInterests == 'string') {
+			/*if(typeof $scope.selectedInterests == 'string') {
 				$scope.selectedInterests = $scope.selectedInterests.split(',');
-			}
+			}*/
 
 			if(interestAlreadySelected(id)) {
 				removeInterest(id);
@@ -56,11 +45,6 @@ define([], function( ){
 				addInterest(id);
 			}
 		};
-
-		TagService.getAll().then(
-				function( tags ) {$scope.tags = tags;},
-				function( error ) { $scope.errorMsg = error; $scope.isError = true;}
-		);
 
 		$scope.register = function () {
 			var user = {
@@ -74,18 +58,14 @@ define([], function( ){
 				return;
 			}
 
-			UserService.registerUser(user).then(function( msg ) {
-				$scope.login();
-			}, function (msg) {
-				console.log(msg);
-			});
-
-
+			UserService.registerUser(user).then($scope.login, function ( ) { console.log('error on Register'); });
 		};
+
 		$scope.enableLogin = function() {
 			$scope.loginActive = true;
 			$scope.registrationActive = false;
 		};
+
 		$scope.enableRegistration = function() {
 			$scope.registrationActive = true;
 			$scope.loginActive = false;
@@ -95,7 +75,7 @@ define([], function( ){
 			if($scope.noTagSelected()) return;
 
 			if(forced) {
-				$cookies.put('interests', $scope.selectedInterests);
+				UserService.setInterests($scope.selectedInterests);
 				UserService.updateUser();
 				$location.path('/');
 			}
@@ -111,17 +91,21 @@ define([], function( ){
 			$location.path('/');
 		};
 
-		$scope.isLoggedIn = function () {
-			return UserService.isLoggedIn();
-		};
-
-		if($scope.isLoggedIn()) {
-			$scope.selectedInterests = UserService.getInterests();
-
-		}
-
+		$scope.isLoggedIn = function () { return UserService.isLoggedIn(); };
 		$scope.noTagSelected = function () { return $scope.selectedInterests.length == 0; };
 		$scope.forceToEventsFlag = function () { return $scope.isLoggedIn() == 0 };
+
+		var init = function () {
+			TagService.getAll().then(
+				function( tags ) {$scope.tags = tags;},
+				function( error ) { $scope.errorMsg = error; $scope.isError = true;}
+			);
+
+			if($scope.isLoggedIn()) { $scope.selectedInterests = UserService.getInterests(); }
+
+		};
+
+		init();
 	}
 
 

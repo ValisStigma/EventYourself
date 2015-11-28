@@ -1,7 +1,7 @@
 define([], function( ){
 	'use strict';
 
-	function eventController( $scope, EventsService, ConfigService, UserService, $location, $cookies, $route ){
+	function eventController( $scope, EventsService, ConfigService, UserService, $location ){
 
 		/*if(UserService.isLoggedIn()) {
 			$scope.interests = UserService.getInterests();
@@ -9,13 +9,10 @@ define([], function( ){
 				function( events ) { $scope.events = events;},
 				function( error ) { $scope.errorMsg = error; $scope.isError = true;}
 			);
-		} else */if( UserService.isGuestWithInterests() || UserService.isLoggedIn()) {
-			var interests = $cookies.get('interests');
-			if(typeof interests == 'string') { interests = interests.split(','); }
-			EventsService.getEventsByTagNames(interests)
-				.then(function (events) {
-					$scope.events = events.events;
-				});
+		} else */
+		if( UserService.isGuestWithInterests() || UserService.isLoggedIn()) {
+			EventsService.getEventsByTagNames(UserService.getInterests())
+				.then(function (events) { $scope.events = events.events; });
 		} else {
 			$location.path('interests');
 		}
@@ -28,7 +25,7 @@ define([], function( ){
 		$scope.getImagePath = ConfigService.basePathCreator('images/events');
 	}
 
-	eventController.$inject = ['$scope', 'EventsService', 'ConfigService', 'UserService', '$location', '$cookies', '$route'];
+	eventController.$inject = ['$scope', 'EventsService', 'ConfigService', 'UserService', '$location'];
 
 	return eventController;
 });
