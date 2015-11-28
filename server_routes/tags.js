@@ -3,9 +3,9 @@
  */
 var express = require('express');
 var collections = ['tags'];
-var dbURI = 'LNdK';
+var dburi = 'mongodb://rolf:StartUp15@ds059644.mongolab.com:59644/heroku_4ph3bdfk';
 var mongojs = require('mongojs');
-var db = mongojs(dbURI, collections);
+var db = mongojs(dburi, collections);
 var app = express();
 var allowCrossDomain = function(request, response, next) {
     response.header('Access-Control-Allow-Origin', '*');
