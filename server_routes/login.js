@@ -13,6 +13,30 @@ function isAdmin(userId) {
     return false;
 }
 
+function getInterests(req, res, next) {
+    db.users.findOne({username: username}, function (err, doc) {
+        if (err || doc === null) {
+            data.success = false;
+            req.session.isLoggedIn = false;
+            res.send(JSON.stringify(data));
+        }
+        if (hash.verify(password, doc.password)) {
+            req.session.isLoggedIn = true;
+            req.session.username = username;
+            req.session.userId = doc._id;
+            if (isAdmin(doc._id)) {
+                req.session.isAdmin = true;
+            }
+            data.interests = doc.interests;
+            res.send(JSON.stringify(data));
+        } else {
+            data.success = false;
+            req.session.isLoggedIn = false;
+            res.send(JSON.stringify(data));
+        }
+    });
+}
+
 function register(res, username, password, interests ,next) {
     "use strict";
     var data = {
@@ -119,4 +143,7 @@ app.delete('/logout', function (req, res) {
     res.json(data);
 });
 
+app.get('/interests', function(req, res, next) {
+    getInterests(req, res, next);
+});
 module.exports = app;

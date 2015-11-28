@@ -4,7 +4,7 @@ define([], function(){
 	var configService = function() {
 		var constant = {
 				path: {assetsPath: 'assets/'},
-				url: {api: "api", base: "http://152.96.234.165:8080/"},
+				url: {api: "api", base: "http://10.54.237.135:5000/"},
 				assetDirs: {img: 'images'}
 			},
 			basePathCreator = function ( directory ) {
