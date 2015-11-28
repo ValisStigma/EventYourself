@@ -19,11 +19,13 @@ define([], function(){
 		};
 
 		var getInterests = function () {
-			return interests;
+			if(isLoggedIn()) return $cookies.get('interests');
+			return null;
 		};
 
 		var getUsername = function () {
-			return username;
+			if(isLoggedIn()) return $cookies.get('username');
+			return null;
 		};
 
 		var setUsername = function ( username ) {
@@ -64,6 +66,8 @@ define([], function(){
 					console.log(user);
 					interests = user.interests;
 					username = user.username;
+					$cookies.put('username', username);
+					$cookies.put('interests', interests);
 					def.resolve('pass')
 				})
 				.error( function() { def.reject('err') });
@@ -74,8 +78,10 @@ define([], function(){
 
 
 		var isGuest = function () { return !isLoggedIn() };
+		var isGuestWithInterests = function () { return !$cookies.get('username') && $cookies.get('interests') };
 
-		return { isLoggedIn: isLoggedIn, isGuest: isGuest, login: login, registerUser: registerUser, getInterests: getInterests, hasInterests: hasInterests, setInterests: setInterests, setUsername: setUsername, getUsername: getUsername, refreshInterests: refreshInterests}
+
+		return { isLoggedIn: isLoggedIn, isGuest: isGuest, login: login, registerUser: registerUser, getInterests: getInterests, hasInterests: hasInterests, setInterests: setInterests, setUsername: setUsername, getUsername: getUsername, refreshInterests: refreshInterests, isGuestWithInterests: isGuestWithInterests}
 	};
 
 	userService.$inject = [ '$http', 'ConfigService', '$q', '$cookies'];
