@@ -8176,9 +8176,7 @@ hr.on-light {
 body {
   background-image: url("../../assets/images/mountain.jpg");
   background-repeat: no-repeat;
-  background-attachment: fixed;
-    background-size: 100%;
-}
+  background-attachment: fixed; }
 
 img {
   max-width: 100%; }
@@ -8220,3 +8218,16 @@ img {
     background-color: deepskyblue; }
   .inner-tag p.selected {
     background-color: forestgreen; }
+
+.form-horizontal button {
+  width: 100%; }
+
+.form-col {
+  background-color: white;
+  margin-bottom: 15px; }
+
+.form-row {
+  margin-left: 0;
+  margin-right: 0; }
+  .form-row .form-group {
+    margin: 5px 0 0 0; }
