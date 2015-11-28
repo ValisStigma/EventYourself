@@ -84,7 +84,6 @@ define([], function( ){
 			}
 		};
 	}
-	}
 
 
 
