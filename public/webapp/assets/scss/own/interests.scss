@@ -1,0 +1,25 @@
+.row {
+  a {
+    margin:auto;
+  }
+}
+
+.button-col {
+  text-align: center;
+  margin-bottom:15px;
+  p {
+    padding: 10px 20px;
+  }
+}
+.inner-tag {
+  cursor: pointer;
+  p {
+    color:#fff;
+    padding:40px 20px;
+    text-align: center;
+    background-color:deepskyblue;
+  }
+  p.selected {
+    background-color:forestgreen;
+  }
+}

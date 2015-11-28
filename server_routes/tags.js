@@ -37,11 +37,11 @@ function createTag(name, callback){
 }
 
 app.get('/', function(request, response) {
-    db.tags.find({}, function (err, events) {
+    db.tags.find({}, function (err, tags) {
         if (err) {
             response.json(err);
         } else {
-            response.json({events: events});
+            response.json({tags: tags});
         }
     });
 });
