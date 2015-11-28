@@ -2,10 +2,21 @@
     <p data-ng-show="isError">{{errorMsg}}</p>
     <div class="row description-body">
         <div class="col-xs-12 col-lg-4 left-row">
-            <a href="#/events" class="back-btn"><img data-ng-src="{{getImagePath('back.png')}}" alt="back button">Übersicht</a>
-            <img data-ng-src="{{ event.picture && getImagePath(event.picture) }}" alt="event image">
-            <a href="javascript:void(0)" class="btn btn-raised btn-success"><span class="glyphicon glyphicon-plus"></span> Teilnehmen</a>
-            <p data-ng-show="event.category.length > 0" class="event-category">{{event.category}}</p>
+            <div class="row">
+                <div class="col-xs-12">
+                    <img class="event-img" data-ng-src="{{ event.picture && getImagePath(event.picture) }}" alt="event image">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12">
+                    <a href="javascript:void(0)" class="btn btn-raised btn-success"><span class="glyphicon glyphicon-plus"></span> Teilnehmen</a>
+
+                </div>
+                <div class="col-xs-12">
+                    <a href="#/events" class="btn btn-raised btn-info"><span class="glyphicon glyphicon-arrow-left"></span> Übersicht</a>
+
+                </div>
+            </div>
         </div>
 
         <div class="col-xs-12 col-lg-8 right-row well panel panel-default">
@@ -19,14 +30,6 @@
                 <span data-ng-show="event.period">Alle {{event.period}} Minuten</span>
             </p>
             <p class="event-location"><span class="glyphicon glyphicon-pushpin"></span> {{event.location}}</p>
-
-            <div class="event-sponsors">
-                <span class="glyphicon glyphicon-user"></span>
-                <span data-ng-repeat="sponsor in event.sponsor" class="sponsor">
-                    <a data-ng-show="sponsor.url.length > 0" target="_blank" data-ng-href="{{sponsor.url}}">{{sponsor.name}}</a>{{$last ? '' : ', '}}
-                    <span data-ng-show="!sponsor.url">{{sponsor.name}}{{$last ? '' : ', '}} </span>
-                    </span>
-            </div>
             <h3>Beschreibung</h3>
             <p class="event-description">{{event.description}}</p>
             <div class="tags">

@@ -118,9 +118,11 @@ app.get('/:id', function(request, response) {
                 period: event.period,
                 rating: event.rating,
                 sponsor: event.sponsor,
+                sponsor: event.sponsor,
                 location: event.location,
                 order: event.order,
-                comments: []
+                comments: [],
+                tags: event.tags
             });
         } else {
             response.status(404).send('Event (id '+request.params.id+') not found.')

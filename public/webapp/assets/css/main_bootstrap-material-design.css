@@ -8165,3 +8165,6 @@ hr.on-light {
   -moz-osx-font-smoothing: grayscale;
   pointer-events: none;
   color: #757575; }
+
+.event-img {
+  max-width: 100%; }
