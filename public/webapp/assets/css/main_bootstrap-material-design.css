@@ -8168,3 +8168,28 @@ hr.on-light {
 
 .event-img {
   max-width: 100%; }
+
+.event-detail-body {
+  background-color: rgba(0, 0, 0, 0.58);
+  padding: 20px; }
+
+body {
+  background-image: url("../../assets/images/mountain.jpg");
+  background-repeat: no-repeat;
+  background-attachment: fixed; }
+
+img {
+  max-width: 100%; }
+
+.event-list-item {
+  margin-bottom: 15px; }
+  .event-list-item .row {
+    margin-left: 0;
+    margin-right: 0; }
+  .event-list-item .inner-event {
+    background-color: white; }
+    .event-list-item .inner-event a {
+      display: flex;
+      align-items: center;
+      color: #333;
+      text-decoration: none; }

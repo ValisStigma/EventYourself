@@ -6,3 +6,5 @@
 @import 'bootstrap/shadows';  // these are mixins only, and must be placed at the top before use (sass requiremnt)
 @import 'bootstrap/bootstrap-material-design'; // include the material content given the mixins above (sass requirement for inclusion order of mixins)
 @import 'own/EventDetail';
+@import 'own/main';
+@import 'own/Events';

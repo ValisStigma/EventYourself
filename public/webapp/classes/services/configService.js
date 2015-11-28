@@ -17,6 +17,7 @@ define([], function(){
 		var getConstants = function () { return constant; };
 
 		return { constants: getConstants(), basePathCreator: basePathCreator, requestUrlCreator: requestsUrlCreator }
+
 	};
 
 	return configService;

@@ -1,0 +1,22 @@
+
+img {
+  max-width:100%;
+}
+
+
+.event-list-item {
+  margin-bottom:15px;
+  .row {
+    margin-left:0;
+    margin-right:0;
+  }
+  .inner-event {
+    background-color:white;
+    a {
+      display:flex;
+      align-items: center;
+      color:#333;
+      text-decoration: none;
+    }
+  }
+}
