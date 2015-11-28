@@ -62,6 +62,14 @@ define([], function( ){
 			}, function (msg) {
 				alert(msg)
 			});
+
+
+		};
+		$scope.enableLogin = function() {
+			$scope.loginActive = true;
+		};
+		$scope.enableRegistration = function() {
+			$scope.registrationActive = true;
 		};
 
 		$scope.goToEvents = function ( forced ) {
@@ -75,6 +83,7 @@ define([], function( ){
 				console.log('hhu')
 			}
 		};
+	}
 	}
 
 
