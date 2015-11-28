@@ -3,10 +3,9 @@ define([], function( ){
 
 	function eventController( $scope, EventsService, ConfigService, UserService, $location, $cookies ){
 
-
-
 		if(UserService.isLoggedIn() || UserService.isGuestWithInterests()) {
-			$scope.interests = UserService.getInterests();
+			console.log('attach intrests to scope');
+			$scope.interests = EventsService.  //UserService.getInterests();
 		} else {
 			$location.path('interests');
 		}

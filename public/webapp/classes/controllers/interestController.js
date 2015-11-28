@@ -78,8 +78,8 @@ define([], function( ){
 
 		$scope.goToEvents = function ( forced ) {
 			if(forced) {
-				UserService.setInterests($scope.interests);
-				$location('events');
+				$cookies.put('interests', $scope.selectedInterests);
+				$location.path('/');
 			}
 
 			if(UserService.isGuest()) {

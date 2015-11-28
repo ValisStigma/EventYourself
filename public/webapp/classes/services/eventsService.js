@@ -38,6 +38,14 @@ define([], function(){
 			return def.promise;
 		};
 
+		var getEventsByTagNames = function () {
+			var def = $q.defer();
+
+			$http.post();
+
+			return def.promise;
+		};
+
 		var getEventById = function (id) {
 			var def = $q.defer(),
 				deferOptions = {
