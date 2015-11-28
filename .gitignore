@@ -2,5 +2,5 @@
 
 .idea
 node_modules
-public/assets/css/main.css
+public/webapp/assets/css/main.css
 .sass-cache
