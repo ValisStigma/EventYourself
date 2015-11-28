@@ -10,10 +10,18 @@
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.14.1",
+    "cookie-parser": "^1.4.0",
     "express": "^4.13.3",
-    "mongojs": "^1.4.1",
+    "express-session": "^1.12.1",
     "gulp": "^3.8.11",
     "gulp-sass": "^2.0.0",
-    "gulp-supervisor": "^0.1.2"
+    "gulp-supervisor": "^0.1.2",
+    "mongojs": "^1.4.1",
+    "morgan": "^1.6.1",
+    "password-hash": "^1.2.2",
+    "path": "^0.12.7",
+    "serve-favicon": "^2.3.0",
+    "uuid": "^2.0.1",
+    "validator": "^4.3.0"
   }
 }
