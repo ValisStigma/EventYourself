@@ -75,13 +75,18 @@ define([], function(){
 			return def.promise;
 		};
 
-
+		var logout = function () {
+			$cookies.remove('interests');
+			$cookies.remove('username');
+			interests = [];
+			username = null;
+		};
 
 		var isGuest = function () { return !isLoggedIn() };
 		var isGuestWithInterests = function () { return !$cookies.get('username') && $cookies.get('interests') };
 
 
-		return { isLoggedIn: isLoggedIn, isGuest: isGuest, login: login, registerUser: registerUser, getInterests: getInterests, hasInterests: hasInterests, setInterests: setInterests, setUsername: setUsername, getUsername: getUsername, refreshInterests: refreshInterests, isGuestWithInterests: isGuestWithInterests}
+		return { isLoggedIn: isLoggedIn, isGuest: isGuest, login: login, registerUser: registerUser, getInterests: getInterests, hasInterests: hasInterests, setInterests: setInterests, setUsername: setUsername, getUsername: getUsername, refreshInterests: refreshInterests, isGuestWithInterests: isGuestWithInterests, logout:logout}
 	};
 
 	userService.$inject = [ '$http', 'ConfigService', '$q', '$cookies'];

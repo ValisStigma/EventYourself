@@ -85,9 +85,25 @@ define([], function( ){
 			if(UserService.isGuest()) {
 				$scope.loginActive = false;
 				$scope.registrationActive = true;
-				console.log('hhu')
 			}
 		};
+
+		$scope.logout = function () {
+			UserService.logout();
+			$location.path('interests');
+		};
+
+		$scope.isLoggedIn = function () {
+			return UserService.isLoggedIn();
+		};
+
+		if($scope.isLoggedIn()) {
+			$scope.selectedInterests = UserService.getInterests();
+
+		}
+
+		$scope.noTagSelected = function () { return $scope.selectedInterests.length == 0 ? 'disabled' : ''; }
+		$scope.forceToEventsFlag = function () { return $scope.isLoggedIn() == 0 }
 	}
 
 

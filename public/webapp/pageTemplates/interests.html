@@ -1,39 +1,42 @@
 <div class="interests-body">
-    <div class="row" data-ng-show="!loginActive">
-        <div class="col-lg-12 button-col">
-            <button data-ng-click="enableLogin()" class="btn btn-raised btn-success">Login</button>
+    <div data-ng-show="!isLoggedIn()">
+        <div class="row" data-ng-show="!loginActive">
+            <div class="col-lg-12 button-col">
+                <button data-ng-click="enableLogin()" class="btn btn-raised btn-success">Login</button>
+            </div>
+
         </div>
+        <div class="row form-row" data-ng-show="loginActive && !registrationActive">
+            <div class="col-xs-12 form-col">
+            <div class="form-horizontal">
+                <div class=" col-xs-12 col-md-6 form-group is-empty">
+                    <label for="inputUsernameLogin" class="col-md-2 control-label">Username</label>
 
-    </div>
-    <div class="row form-row" data-ng-show="loginActive && !registrationActive">
-        <div class="col-xs-12 form-col">
-        <div class="form-horizontal">
-            <div class=" col-xs-12 col-md-6 form-group is-empty">
-                <label for="inputUsernameLogin" class="col-md-2 control-label">Username</label>
-
-                <div class="col-md-10">
-                    <input data-ng-model="username" class="form-control" id="inputUsernameLogin" placeholder="Username" type="text">
+                    <div class="col-md-10">
+                        <input data-ng-model="username" class="form-control" id="inputUsernameLogin" placeholder="Username" type="text">
+                    </div>
+                    <span class="material-input"></span>
                 </div>
-                <span class="material-input"></span>
-            </div>
-            <div class=" col-xs-12 col-md-6 form-group is-empty">
-                <label for="inputPasswordLogin" class="col-md-2 control-label">Password</label>
+                <div class=" col-xs-12 col-md-6 form-group is-empty">
+                    <label for="inputPasswordLogin" class="col-md-2 control-label">Password</label>
 
-                <div class="col-md-10">
-                    <input data-ng-model="password" class="form-control" id="inputPasswordLogin" placeholder="Password" type="password">
+                    <div class="col-md-10">
+                        <input data-ng-model="password" class="form-control" id="inputPasswordLogin" placeholder="Password" type="password">
+                    </div>
+                    <span class="material-input"></span>
                 </div>
-                <span class="material-input"></span>
+                <div class="col-xs-12 col-lg-2 col-lg-offset-10">
+                    <button data-ng-click="login()" class="btn btn-raised btn-success">Login</button>
+                </div>
             </div>
-            <div class="col-xs-12 col-lg-2 col-lg-offset-10">
-                <button data-ng-click="login()" class="btn btn-raised btn-success">Login</button>
             </div>
-        </div>
+
         </div>
 
-    </div>
-    <div class="row">
-        <div class="col-lg-4 col-lg-offset-4 col-xs-12 button-col">
-            <p class="panel panel-default clearfix"> - OR CHOOSE YOUR INTERESTS - </p>
+        <div class="row">
+            <div class="col-lg-4 col-lg-offset-4 col-xs-12 button-col">
+                <p class="panel panel-default clearfix"> - OR CHOOSE YOUR INTERESTS - </p>
+            </div>
         </div>
     </div>
     <div class="row interests-container">
@@ -51,7 +54,12 @@
 
     <div class="row" data-ng-show="!registrationActive">
         <div class="col-lg-12 button-col">
-            <button data-ng-click="goToEvents()" class="btn btn-raised btn-success">Weiter</button>
+
+            <button data-ng-show="isLoggedIn()" data-ng-click="goToEvents(true)" class="btn btn-raised btn-success {{noTagSelected()}}">Weiter</button>
+            <button data-ng-show="!isLoggedIn()" data-ng-click="goToEvents(false)" class="btn btn-raised btn-success {{noTagSelected()}}">Weiter</button>
+        </div>
+        <div data-ng-show="isLoggedIn()" class="col-xs-12 col-lg-2 col-lg-offset-0">
+            <button data-ng-click="logout()" class="btn btn-raised btn-success">Logout</button>
         </div>
 
     </div>

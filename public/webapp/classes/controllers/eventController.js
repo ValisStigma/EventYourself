@@ -1,7 +1,7 @@
 define([], function( ){
 	'use strict';
 
-	function eventController( $scope, EventsService, ConfigService, UserService, $location, $cookies ){
+	function eventController( $scope, EventsService, ConfigService, UserService, $location, $cookies, $route ){
 
 		if(UserService.isLoggedIn()) {
 			$scope.interests = UserService.getInterests();
@@ -16,11 +16,15 @@ define([], function( ){
 			$location.path('interests');
 		}
 
+		$scope.logout = function () {
+			UserService.logout();
+			$location.path('interests');
+		};
 
 		$scope.getImagePath = ConfigService.basePathCreator('images/events');
 	}
 
-	eventController.$inject = ['$scope', 'EventsService', 'ConfigService', 'UserService', '$location', '$cookies'];
+	eventController.$inject = ['$scope', 'EventsService', 'ConfigService', 'UserService', '$location', '$cookies', '$route'];
 
 	return eventController;
 });

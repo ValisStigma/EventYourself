@@ -24,7 +24,7 @@ define([], function(){
                     success: function ( data ) { def.resolve( tags = data.tags ) },
                     error: function ( data ) { def.reject( data ); }};
 
-            tags.isEmpty() ? fetchAllTags(defOptions) : def.resolve(events);
+            tags.isEmpty() ? fetchAllTags(defOptions) : def.resolve(tags);
             return def.promise;
         };
 
