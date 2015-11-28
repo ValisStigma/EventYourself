@@ -72,6 +72,7 @@ define([], function( ){
 
 			if(UserService.isGuest()) {
 				$scope.showRegisterForm = true;
+				console.log('hhu')
 			}
 		};
 	}
