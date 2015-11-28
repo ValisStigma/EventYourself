@@ -1,7 +1,7 @@
 var express = require('express');
 var app = express();
 var hash = require('password-hash');
-var dburi = 'mongodb://rolf:StartUp15@ds059644.mongolab.com:59644/heroku_4ph3bdfk';
+var dburi = 'LNdK';
 var collections = ['users'];
 var mongojs = require('mongojs');
 var db = mongojs(dburi, collections);

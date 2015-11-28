@@ -62,7 +62,7 @@ function createTag(name, callback){
     var tag = {
         name : name
     };
-    superTags.insert(tag, function(err, newTag) {
+    db.tags.insert(tag, function(err, newTag) {
         if(err) {
             callback(null);
         } else {
@@ -72,21 +72,13 @@ function createTag(name, callback){
 }
 
 app.get('/', function(request, response) {
-    MongoClient.connect(url, function(err, db) {
-        assert.equal(null, err);
-        console.log("Connected correctly to server");
-        superTags = db.collection('tags');
-        superTags.find({}, function (err, tags) {
-            if (err) {
-                response.json(err);
-            } else {
-                response.json({tags: tags});
-            }
-        });
-        // Find some documents
-
+    db.tags.find({}, function (err, tags) {
+        if (err) {
+            response.json(err);
+        } else {
+            response.json({tags: tags});
+        }
     });
-
 });
 
 app.post('/', function(request, response) {

@@ -3,13 +3,13 @@ define([], function( ){
 
 	function eventController( $scope, EventsService, ConfigService, UserService, $location, $cookies, $route ){
 
-		if(UserService.isLoggedIn()) {
+		/*if(UserService.isLoggedIn()) {
 			$scope.interests = UserService.getInterests();
 			EventsService.getAll().then(
 				function( events ) { $scope.events = events;},
 				function( error ) { $scope.errorMsg = error; $scope.isError = true;}
 			);
-		} else if( UserService.isGuestWithInterests()) {
+		} else */if( UserService.isGuestWithInterests() || UserService.isLoggedIn()) {
 			var interests = $cookies.get('interests');
 			if(typeof interests == 'string') { interests = interests.split(','); }
 			EventsService.getEventsByTagNames(interests)
