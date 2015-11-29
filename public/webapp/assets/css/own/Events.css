@@ -19,3 +19,7 @@ img {
     align-items: center;
     color: #333;
     text-decoration: none; }
+
+.events-body {
+  margin-top: 15px;
+  margin-bottom: 15px; }

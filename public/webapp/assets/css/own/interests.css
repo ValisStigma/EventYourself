@@ -32,3 +32,6 @@
     .form-row .form-group .form-control.error {
       border: 1px solid red;
       border-radius: 7px; }
+
+.interests-body {
+  margin-top: 15px; }
