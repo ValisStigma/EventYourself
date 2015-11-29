@@ -6,8 +6,8 @@ define([], function(){
 				path: {assetsPath: 'assets/'},
 				url: {
 					api: "api",
-					base: "http://localhost:5000/"
-					//base: "https://eventyourself.herokuapp.com/"
+					//base: "http://localhost:5000/"
+					base: "https://eventyourself.herokuapp.com/"
 				},
 				assetDirs: {img: 'images'}
 			},
