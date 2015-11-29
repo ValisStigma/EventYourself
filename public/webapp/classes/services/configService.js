@@ -4,7 +4,11 @@ define([], function(){
 	var configService = function() {
 		var constant = {
 				path: {assetsPath: 'assets/'},
-				url: {api: "api", base: "http://localhost:5000/"},
+				url: {
+					api: "api",
+					//base: "http://localhost:5000/"
+					base: "https://eventyourself.herokuapp.com/"
+				},
 				assetDirs: {img: 'images'}
 			},
 			basePathCreator = function ( directory ) {

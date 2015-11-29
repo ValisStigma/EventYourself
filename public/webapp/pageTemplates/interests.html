@@ -52,7 +52,7 @@
     </div>
 
 
-    <div class="row" data-ng-show="!registrationActive">
+    <div class="row" data-ng-show="!registrationActive || noTagSelected()">
         <div class="col-lg-12 button-col">
 
             <button data-ng-show="isLoggedIn()" data-ng-click="goToEvents(true)"  class="btn btn-raised btn-success {{noTagSelected() ? 'disabled' : ''}}">Weiter</button>
@@ -63,7 +63,7 @@
         </div>
 
     </div>
-    <div class="row form-row" data-ng-show="registrationActive && !loginActive">
+    <div class="row form-row" data-ng-show="registrationActive && !loginActive && !noTagSelected()">
         <div class="col-xs-12 form-col">
             <div class="form-horizontal">
                 <div class=" col-xs-12 col-md-6 form-group is-empty">

@@ -97,7 +97,7 @@ define([], function( ){
 
 		var init = function () {
 			TagService.getAll().then(
-				function( tags ) {$scope.tags = tags;},
+				function( tags ) { $scope.tags = tags;},
 				function( error ) { $scope.errorMsg = error; $scope.isError = true;}
 			);
 

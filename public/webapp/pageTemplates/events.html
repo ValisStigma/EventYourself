@@ -10,8 +10,8 @@
                     <a href="#/eventDetail/{{event._id}}">
 
                     <div class="col-xs-3  img-container">
-                            <img class="event-img" data-ng-show="event.picture != undefined" src="{{ event.picture && getImagePath(event.picture) }}" alt="event image">
-                            <img class="event-img" data-ng-show="event.picture == undefined" src="/assets/images/events/generic.jpg" alt="event-image">
+                            <img class="event-img" data-ng-show="event.picture != undefined" data-ng-src="{{ event.picture && getImagePath(event.picture) }}" alt="event image">
+                            <img class="event-img" data-ng-show="event.picture == undefined" data-ng-src="/assets/images/events/generic.jpg" alt="event-image">
                     </div>
                     <div class="col-xs-9 description-col">
                         <h3>{{event.title}}</h3>
@@ -29,11 +29,16 @@
 
 
     </div>
-    <div class="row">
-
-
+    <div class="row" data-ng-show="isLoggedIn()">
         <div class="col-xs-12 col-lg-12 col-lg-offset-0">
-            <button data-ng-click="logout()" class="btn btn-raised btn-success">Logout</button>
+            <button data-ng-click="logout()" class="btn btn-raised btn-danger">Logout</button>
         </div>
     </div>
+    <div class="row">
+        <div class="col-xs-12 col-lg-12 col-lg-offset-0">
+            <a href="#interests" class="btn btn-raised btn-info">Change your interests</a>
+        </div>
+    </div>
+
+
 </div>

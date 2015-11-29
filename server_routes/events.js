@@ -1,13 +1,21 @@
 var express = require('express');
-var collections = ['events'];
 var app = express();
 var mongoose = require('mongoose');
+var Schema = mongoose.Schema;
+
+//mongoose.createConnection('mongodb://localhost/LNdK');
 mongoose.createConnection('mongodb://rolf:StartUp15@ds059644.mongolab.com:59644/heroku_4ph3bdfk');
 
-var ObjectId = require('mongoose').Types.ObjectId;
+var eventSchema = new Schema({
+	title: String,
+	place: String,
+	time: String,
+	tags: Array,
+	_id : Schema.ObjectId
+});
 
-var allEvents = mongoose.model('events', new mongoose.Schema({ _id: String, place: String, title: String, time: String, tags: [{ Name: String }], },
-    { collection : 'events' }) );
+var Event = mongoose.model('Event', eventSchema, "events");
+
 
 
 var allowCrossDomain = function(request, response, next) {
@@ -50,97 +58,73 @@ function createEvent(name, description, startTime, endTime, category, picture, p
 }
 
 function findEvent(id, callback) {
-    allEvents.findOne({"_id": id}, function(err, event) {
-        if(err) {
-            callback(null);
-        } else {
-            callback(event);
-        }
+	Event.findOne({"_id": id }, function(err, event) {
+        callback(err ? null : event);
     })
 }
 
+function containsAny (haystack, arr) {
+	for(var i = 0; i < haystack.length; i++) {
+		for(var j = 0; j < arr.length; j++) {
+			if(haystack[i].Name == arr[j]) {
+				return true;
+			}
+		}
+	}
+	return false;
+}
+
+function getMatchedEvents (events, interests) {
+	var matchedEvents = [];
+
+	events.forEach(function(event) {
+		if(event.tags && containsAny(event.tags, interests)) {
+			matchedEvents.push(event);
+		}
+	});
+
+	return matchedEvents;
+}
+
+
+
 app.post('/getByTagNames', nocache, function(request, response) {
-    var interests = null;
-    if(request.body.interests) {
-        interests = request.body.interests;
-    }
-    if(interests) {
-        allEvents.find({},{comments:0}, function (err, events) {
-            if (err) {
-                response.json(err);
-            } else {
-                var matchedEvents = [];
+    var interests = request.body.interests;
 
-                var findOne = function (haystack, arr) {
-                    for(var i = 0; i < haystack.length; i++) {
-                        for(var j = 0; j < arr.length; j++) {
-                            if(haystack[i].Name == arr[j]) {
-                                return true;
-                            }
-                        }
-                    }
-                    return false;
-                };
-                events.forEach(function(event) {
-                    if(event.tags) {
-                        if(findOne(event.tags, interests)) {
-                            matchedEvents.push(event);
-                        }
-                    }
+	if(!interests) {
+		response.status(400).send('No Interests sended');
+		return;
+	}
 
-                });
-                response.json({events: matchedEvents});
-            }
-        });
-    }
-    else {
-        response.status(400).send('No Interests sended');
+    Event.find({}, function (err, events) {
+        if (err) {
+            response.json(err);
+        } else {
+	        response.json({events: getMatchedEvents(events, interests)});
+        }
+    });
 
-    }
 
 });
 
 
 app.get('/', nocache, function(request, response) {
-    var interests = null;
-    if(request.session && request.session.interests) {
-        interests = request.session.interests;
-    } else if(request.body.interests) {
-        interests = request.body.interests;
-    }
-    if(interests) {
-        allEvents.find({},{comments:0}, function (err, events) {
-            if (err) {
-                response.json(err);
-            } else {
-                var matchedEvents = [];
 
-                var findOne = function (haystack, arr) {
-                    for(var i = 0; i < haystack.length; i++) {
-                        for(var j = 0; j < arr.length; j++) {
-                            if(haystack[i].Name == arr[j]) {
-                                return true;
-                            }
-                        }
-                    }
-                    return false;
-                };
-                events.forEach(function(event) {
-                    if(event.tags) {
-                        if(findOne(event.tags, interests)) {
-                            matchedEvents.push(event);
-                        }
-                    }
+	if(!request.session || !request.session.interests)
+	{
+		response.status(400).send('No Interests sended');
+		return;
+	}
 
-                });
-                response.json({events: matchedEvents});
-            }
-        });
-    }
-    else {
-        response.status(400).send('No Interests sended');
+	var interests = request.session.interests;
+    Event.find({}, function (err, events) {
+        if (err) {
+            response.json(err);
+        } else {
+            response.json({events: getMatchedEvents(events, interests)});
+        }
+    });
 
-    }
 
 });
 
@@ -174,15 +158,8 @@ app.get('/:id', function(request, response) {
                 title:event.title,
                 description: event.description,
                 time: event.time,
-                endTime: event.endTime,
-                category: event.category,
                 picture: event.picture,
-                period: event.period,
-                rating: event.rating,
-                sponsor: event.sponsor,
                 place: event.place,
-                order: event.order,
-                comments: [],
                 tags: event.tags
             });
         } else {

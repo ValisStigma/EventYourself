@@ -2,30 +2,20 @@
  * Created by rafael on 28.11.2015.
  */
 var express = require('express');
-var collections = ['tags'];
 
 var mongoose = require('mongoose');
+var Schema = mongoose.Schema;
+
+
+//mongoose.createConnection('mongodb://localhost/LNdK');
 mongoose.createConnection('mongodb://rolf:StartUp15@ds059644.mongolab.com:59644/heroku_4ph3bdfk');
 
-var ObjectId = require('mongoose').Types.ObjectId;
-
-
-
-var MongoClient = require('mongodb').MongoClient
-    , assert = require('assert');
-
-// Connection URL
-var url = 'mongodb://rolf:StartUp15@ds059644.mongolab.com:59644/heroku_4ph3bdfk';
-var url = 'mongodb://rolf:StartUp15@ds059644.mongolab.com:59644/heroku_4ph3bdfk';
-// Use connect method to connect to the Server
-var superTags;
-MongoClient.connect(url, function(err, db) {
-    assert.equal(null, err);
-    console.log("Connected correctly to server");
-    superTags = db.collection('tags');
-    // Find some documents
-
+var tagSchema = new Schema({
+	name: String
 });
+
+var Tag = mongoose.model('Tag', tagSchema, "tags");
+
 
 // ...
 var app = express();
@@ -59,27 +49,11 @@ function createTag(name, callback){
 }
 
 app.get('/', function(request, response) {
-    db.tags.find({}, function (err, tags) {
-        if (err) {
-            response.json(err);
-        } else {
-            response.json({tags: tags});
-        }
-    });
+    Tag.find({}, function (err, tags) { response.json(err ? err : tags); });
 });
 
 app.post('/', function(request, response) {
-    createTag(
-        request.body.name,
-        function(newTag) {
-            if(newTag) {
-                response.json(newTag);
-            } else {
-                response.status(400).send('Tag data incomplete.');
-            }
-        }
-
-    );
+    //TODO create tags
 });
 
 

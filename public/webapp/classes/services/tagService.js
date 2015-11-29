@@ -21,7 +21,7 @@ define([], function(){
         var getAll = function () {
             var def = $q.defer(),
                 defOptions = {
-                    success: function ( data ) { def.resolve( tags = data.tags ) },
+                    success: function ( data ) { def.resolve( data) },
                     error: function ( data ) { def.reject( data ); }};
 
             tags.isEmpty() ? fetchAllTags(defOptions) : def.resolve(tags);

@@ -11,11 +11,12 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var uuid = require('uuid');
 
+var mongoose = require('mongoose');
 var events = require('./server_routes/events');
 var feedback = require('./server_routes/feedback');
-var login = require('./server_routes/login');
 var tags = require('./server_routes/tags');
 var user = require('./server_routes/user');
+
 
 var allowCrossDomain = function(request, response, next) {
     response.header('Access-Control-Allow-Origin', '*');
@@ -23,6 +24,10 @@ var allowCrossDomain = function(request, response, next) {
     response.header('Access-Control-Allow-Headers', 'Content-Type');
     next();
 };
+
+//mongoose.connect('mongodb://localhost/LNdK');
+mongoose.connect('mongodb://rolf:StartUp15@ds059644.mongolab.com:59644/heroku_4ph3bdfk');
+
 
 
 /**
@@ -44,7 +49,6 @@ app.use(session({
 //Route config
 app.use('/api/events', events);
 app.use('/api/feedback', feedback);
-app.use('/api/auth', login);
 app.use('/api/tags', tags);
 app.use('/api/user', user);
 
