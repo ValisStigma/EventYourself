@@ -12,6 +12,7 @@ var eventSchema = new Schema({
 	time: String,
 	tags: Array,
 	description: String,
+	url: String,
 	_id : Schema.ObjectId
 });
 
@@ -160,7 +161,8 @@ app.get('/:id', function(request, response) {
                 time: event.time,
                 picture: event.picture,
                 place: event.place,
-                tags: event.tags
+                tags: event.tags,
+	            url: event.url
             });
         } else {
             response.status(404).send('Event (id '+request.params.id+') not found.')
