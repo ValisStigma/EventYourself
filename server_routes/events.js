@@ -3,8 +3,8 @@ var app = express();
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
-//mongoose.createConnection('mongodb://localhost/LNdK');
-mongoose.createConnection('mongodb://rolf:StartUp15@ds059644.mongolab.com:59644/heroku_4ph3bdfk');
+mongoose.createConnection('mongodb://localhost/LNdK');
+//mongoose.createConnection('mongodb://rolf:StartUp15@ds059644.mongolab.com:59644/heroku_4ph3bdfk');
 
 var eventSchema = new Schema({
 	title: String,
