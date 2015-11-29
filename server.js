@@ -25,8 +25,8 @@ var allowCrossDomain = function(request, response, next) {
     next();
 };
 
-//mongoose.connect('mongodb://localhost/LNdK');
-mongoose.connect('mongodb://rolf:StartUp15@ds059644.mongolab.com:59644/heroku_4ph3bdfk');
+mongoose.connect('mongodb://localhost/LNdK');
+//mongoose.connect('mongodb://rolf:StartUp15@ds059644.mongolab.com:59644/heroku_4ph3bdfk');
 
 
 
