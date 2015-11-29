@@ -19,6 +19,10 @@
                     <a href="#/" class="btn btn-raised btn-info"><span class="glyphicon glyphicon-arrow-left"></span> Übersicht</a>
 
                 </div>
+
+                <div class="col-xs-12 button-row" data-ng-show="event.url">
+                    <a data-ng-href="{{event.url}}"  class="btn btn-raised btn-primary"><span class=" glyphicon glyphicon-tag"></span> Zur Quelle</a>
+                </div>
             </div>
         </div>
 

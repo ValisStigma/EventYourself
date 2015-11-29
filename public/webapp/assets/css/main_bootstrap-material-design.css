@@ -8202,6 +8202,20 @@ body {
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-size: 100%; }
+  body .page-title {
+    margin-top: 15px;
+    margin-left: 0;
+    margin-right: 0;
+    font-size: 41px;
+    text-align: center;
+    padding: 10px;
+    display: inline;
+    color: #0D9041;
+    background-color: rgba(255, 255, 255, 0.68);
+    font-family: serif; }
+  body .page-title-box {
+    margin-top: 15px;
+    text-align: center; }
 
 img {
   max-width: 100%; }
