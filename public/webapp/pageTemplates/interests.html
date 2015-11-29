@@ -25,7 +25,13 @@
                     </div>
                     <span class="material-input"></span>
                 </div>
-                <div class="col-xs-12 col-lg-2 col-lg-offset-10">
+                <div class="{{(invalidCredentials || loginFormError)? '' : 'invisible'}} col-xs-12 col-lg-6 alert alert-danger text-center">
+                    {{
+                    (invalidCredentials && "Benutzername oder Password nicht gültig") ||
+                    (loginFormError && "Bitte Benutzername und Password angeben")
+                    }}
+                </div>
+                <div class="col-xs-12 col-lg-2 col-lg-offset-4">
                     <button data-ng-click="login()" class="btn btn-raised btn-success">Login</button>
                 </div>
             </div>
@@ -82,7 +88,13 @@
                     </div>
                     <span class="material-input"></span>
                 </div>
-                <div class="col-xs-12 col-lg-3 col-lg-offset-7">
+                <div class="{{(userAlreadyExistError || registerFormError )? '' : 'invisible'}} col-xs-12 col-lg-6 alert alert-danger text-center">
+                    {{
+                        (userAlreadyExistError && "Der Benutzername wird bereits verwendet, sorry :(") ||
+                        (registerFormError && "Bitte Benutzername und Password angeben")
+                    }}
+                </div>
+                <div class="col-xs-12 col-lg-3 col-lg-offset-1">
                     <button data-ng-click="goToEvents(true)" class="btn btn-raised btn-warning">Nein danke</button>
 
                 </div>

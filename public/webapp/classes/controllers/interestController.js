@@ -5,7 +5,8 @@ define([], function( ){
 		$scope.selectedInterests = [];
 		$scope.loginFormError = false;
 		$scope.registerFormError = false;
-
+		$scope.userAlreadyExistError = false;
+		$scope.invalidCredentials = false;
 
 		var interestAlreadySelected = function( id ) { return $scope.selectedInterests.indexOf(id) >= 0; };
 
@@ -27,8 +28,8 @@ define([], function( ){
 			UserService.login( credentials ).then(function( data ) {
 				UserService.setUsername($scope.username);
 				$location.path('/');
-			}, function ( data ) {
-				console.log('login error');
+			}, function (  ) {
+				$scope.invalidCredentials = true;
 			});
 		};
 
@@ -58,7 +59,7 @@ define([], function( ){
 				return;
 			}
 
-			UserService.registerUser(user).then($scope.login, function ( ) { console.log('error on Register'); });
+			UserService.registerUser(user).then($scope.login, function ( ) { $scope.userAlreadyExistError = true; });
 		};
 
 		$scope.enableLogin = function() {
